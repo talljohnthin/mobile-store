@@ -23,7 +23,7 @@ const FlashSale = (props) => {
     useEffect(() => {
         setProducts(props.products)
     }, [props.products])
-
+    
     const productList = props.loading ? <Spinner style={styles.spinner} color={fifthColor} /> : (
         <FlatList
             horizontal
@@ -32,7 +32,7 @@ const FlashSale = (props) => {
             }
             data={products}
             renderItem={({ item }) => <ProductHorizontal item={item}  />}
-            keyExtractor={item => item._id.toString()}
+            keyExtractor={item => item.id.toString()}
         />
     )
 

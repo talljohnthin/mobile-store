@@ -9,18 +9,12 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { GET_PRODUCT } from '../../redux/actions/product/productTypes'
 
 const ProductHorizontal = (props) => {
-    let productName = props.item.product_name
-    if (productName.length > 20) {
-        productName = productName.slice(0, 18) + '...'
-    }
-    const productFeatured = props.item.photos.filter((product) => {
-        return product.featured === true
-    })
-    const price = props.item.price_options[0].options[0].price
-    const productId = props.item._id
-    const url = productFeatured.length > 0 ? productFeatured[0].url : false
+    const { cover, productName } = props.item.name
+    const productId = props.item.id
+    const price = props.item.name.priceOptions[0].options[0].price
+    const url = cover
     const renderImageSource = url ? {uri : url} : require('./../../../assets/images/img-not-loaded.jpg')
-
+    
     const handleGetDetails = () => {
         if (productId) {
             props.getProduct(productId)

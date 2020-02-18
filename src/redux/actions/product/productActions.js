@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { domain, axiosConfig  } from '../../constant'
+import { db } from './../../../config/firebase'
 import { 
     GET_ALL_PRODUCTS,
     PRODUCT_REQUEST_HINT,
@@ -16,20 +17,21 @@ export const getAllProducts = () => {
         dispatch({
             type: PRODUCT_REQUEST_LOADING
         })
-        axios.get(`${ domain }/products`)
-        .then(function (response) {
+        db.collection("products")
+        .onSnapshot(snapshot => {
+            const products = []
+            snapshot.forEach(doc => {
+                const obj = {
+                    id: doc.id,
+                    name: doc.data()
+                }
+                products.push(obj)
+            })
             dispatch({
                 type: GET_ALL_PRODUCTS,
-                payload: response.data
+                payload: products
             })
         })
-        .catch(function (error) {
-            console.log(error.message)
-           dispatch({
-                type: PRODUCT_REQUEST_ERROR,
-                payload: error
-            })
-        });
     }
 }
 

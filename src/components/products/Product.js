@@ -9,17 +9,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { GET_PRODUCT, SHOW_WISH_MODAL } from './../../redux/actions/product/productTypes'
 
 const Product = (props) => {
-    let productName = props.item.product_name
+    let productName = props.item.productName
   
     if (productName.length > 20) {
         productName = productName.slice(0, 18) + '...'
     }
-    const productFeatured = props.item.photos.filter((product) => {
-        return product.featured === true
-    })
-    const productId = props.item._id
-    const price = props.item.price_options[0].options[0].price
-    const url = productFeatured && productFeatured[0].url
+    const productId = props.item.id
+    const price = props.item.priceOptions[0].options[0].price
+    const url = props.item.cover
     const renderImageSource = url ? {uri : url} : require('./../../../assets/images/img-not-loaded.jpg')
     
     const handleGetDetails = () => {

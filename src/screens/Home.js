@@ -15,7 +15,7 @@ const Home = (props) => {
     return (
         <View style={styles.homeWrapper}>
             <Hero />
-            {/*<FlashSale />*/}
+            <FlashSale />
         </View>
     )
 }
