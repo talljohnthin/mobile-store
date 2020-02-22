@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { domain } from '../../constant'
+import { db } from './../../../config/firebase'
 import { 
     GET_SEGMENTS,
     SEGMENT_REQUEST_LOADING,
@@ -11,18 +12,25 @@ export const getSegments = () => {
         dispatch({
             type: SEGMENT_REQUEST_LOADING
         })
-        axios.get(`${ domain }/segments`)
-        .then(function (response) {
+        db.collection("segments")
+        .onSnapshot(snapshot => {
+            const segments = []
+            snapshot.forEach(doc => {
+                const obj = {
+                    id: doc.id,
+                    name: doc.data()
+                }
+                segments.push(obj)
+            })
             dispatch({
                 type: GET_SEGMENTS,
-                payload: response.data
+                payload: segments
             })
-        })
-        .catch(function (error) {
-           dispatch({
+        }, function(error) {
+            dispatch({
                 type: SEGMENT_REQUEST_ERROR,
                 payload: error
             })
-        });
+        })
     }
 }

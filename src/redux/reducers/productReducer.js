@@ -5,7 +5,7 @@ import {
     PRODUCT_REQUEST_SEARCH,
     PRODUCT_CLEAR_HINT,
     PRODUCT_REQUEST_SEGMENT_CATEGORY,
-    SHOW_WISH_MODAL,
+    SHOW_CART_MODAL,
     PRODUCT_REQUEST_LOADING,
     PRODUCT_REQUEST_ERROR
 } from './../actions/product/productTypes'
@@ -18,7 +18,7 @@ const initialState = {
     searchHint: [],
     searchAndFilters: [],
     selectedCategories: [],
-    showWishModal: false
+    showCartModal: false
 }
 
 const reducer = ( state = initialState, action) => {
@@ -64,10 +64,10 @@ const reducer = ( state = initialState, action) => {
                 searchHint:[],
                 productErrorMessage:''
             }
-        case SHOW_WISH_MODAL :
+        case SHOW_CART_MODAL :
             return {
                 ...state,
-                showWishModal:action.payload,
+                showCartModal:action.payload,
                 productErrorMessage:''
             }
         case PRODUCT_REQUEST_LOADING :
@@ -88,7 +88,7 @@ const reducer = ( state = initialState, action) => {
 
 const findProduct = (state, id) => {
     const newState = [...state.products]
-    return newState.find( product => product._id == id )
+    return newState.find( product => product.id == id )
 }
 
 export default reducer

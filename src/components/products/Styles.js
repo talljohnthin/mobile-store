@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet} from 'react-native'
 import {
     fifthColor,
     tertiaryFont,
@@ -37,23 +37,20 @@ export default Styles = StyleSheet.create({
     },
     productHeart: {
         position:'absolute',
-        right:0-4,
-        bottom:78,
+        right:-10,
+        bottom:70,
         zIndex:1,
         justifyContent:'center',
         alignItems:'center',
-        width:60,
-        height:60,
-        backgroundColor:'#fff',
-        borderRadius:50,
+        width:80,
+        height:80,
         elevation:4,
-        shadowOffset: { width: 10, height: 10 },
-        shadowColor: "grey",
         shadowOpacity: 0.2,
         shadowRadius: 20,
-        transform: [
-            { scale: 0.5},
-        ],
+        padding:0
+    },
+    productHeartIcon: {
+        color:fifthColor
     },
     productImageWrapper: {
         backgroundColor:'#f5f5f5',

@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 import { View, Image } from 'react-native'
 import Text from '../../utils/Text'
 import { withNavigation } from 'react-navigation'
+import { getProduct } from './../../redux/actions/product/productActions'
 import Icon from 'react-native-vector-icons/AntDesign'
 import styles from './Styles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { GET_PRODUCT } from '../../redux/actions/product/productTypes'
 
 const ProductHorizontal = (props) => {
     const { cover, productName } = props.item.name
@@ -38,18 +38,11 @@ const ProductHorizontal = (props) => {
             <View style={styles.productDescWrapper}>
                 <Text style={styles.productName}>{productName}</Text>
                 <Text style={styles.productPrice}>&#8369;{price}</Text>
-                
             </View>
         </View>
     )
 }
 
-
-
-const mapDispatchToProps = dispatch => {
-    return {
-      getProduct: ( productId ) =>  dispatch({type: GET_PRODUCT, payload: productId})
-    }
-  }
+const mapDispatchToProps = { getProduct }
 
 export default connect(null, mapDispatchToProps)(withNavigation(ProductHorizontal))

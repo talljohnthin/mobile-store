@@ -25,7 +25,7 @@ const Search = (props) => {
             props.navigation.navigate('SearchAndFilter', { searchKey: textQuery})
         }
     }
-
+/*
     const renderHint = () => {
         if (searchHint.length > 0) {
             return searchHint.map(item => {
@@ -39,9 +39,9 @@ const Search = (props) => {
             })
         }
     }
-
+*/
     useEffect(() => {
-        renderHint()
+      //  renderHint()
     },[searchHint, search])
 
     return (
@@ -53,7 +53,7 @@ const Search = (props) => {
                 </TouchableOpacity>
             </Item>
             <List style={styles.searchGuess} >
-               { renderHint() }
+              
             </List>
             <View>
                 <Text style={styles.recentSearchTitle}>Recent searches</Text>

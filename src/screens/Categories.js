@@ -16,47 +16,16 @@ const Categories = (props) => {
         if (props.segments.length < 1) {
            props.getSegments()
         }
-    })
+        console.log(segments)
+    }, [])
     useEffect(() => {
         props.segments && setSegments( props.segments )
+        
     },[props.segments])
-
-    const renderTab = () => {
-        return props.segments.map(item => {
-            return (
-                <Tab key={ item._id } heading={<TabHeading 
-                    activeTabContainerStyle={{backgroundColor:'red'}}
-                    style={SharedStyles.tabHeading}
-                    >
-                        <Image 
-                            style={{ width: 50, height: 50, borderRadius: 50 }} 
-                            source={{ uri : item.photos[0].url}}
-                        />
-                        <Text style={SharedStyles.tabHeadingText}>{item.segment_name}</Text>
-                    </TabHeading>}
-                        textStyle={SharedStyles.textStyle}
-                        tabStyle={SharedStyles.tabStyle}
-                        tabBarUnderlineStyle={SharedStyles.tabBarUnderlineStyle}
-                    >
-                    <CategoryList segmentId={item._id} />
-                </Tab>
-            )
-        })
-    }
-    const renderTabs = () => {
-        return <Tabs
-            tabBarUnderlineStyle={SharedStyles.tabBarUnderlineStyle}
-            renderTabBar={() => <ScrollableTab style={SharedStyles.ScrollableTab} />}
-        >
-            { renderTab() }
-        </Tabs>
-    }
 
     return (
         <Container>
-            {
-                segments.length > 0 ?  renderTabs() : <Spinner style={{marginTop:30}} color={ fifthColor } />
-            }
+           <Text>Hi</Text>
         </Container>
     )
 }

@@ -20,12 +20,11 @@ const initialPhoto = [
 ]
 
 const ProductDetail = (props) => {
-    const { product_name, price_options, product_descriptions  } = props.product
+    const { productName, priceOptions, descriptions, cover, productImages  } = props.product.name
     const [activeTab, setActiveTab] = useState(0)
     const [productImage, setProductImage] = useState(initialPhoto)
     const [price, setPrice] = useState(0)
 
-    const variations = price_options
     const [variationOption, setVariationOption] = useState([])
     const [selectedVariation, setSelectedVariation] = useState(0)
     const [selectedVariationOption, setSelectedVariationOption] = useState('')
@@ -42,7 +41,7 @@ const ProductDetail = (props) => {
 
     const handleSelectedVariation = index => {
         if ( index !== undefined && index !== '') {
-            setVariationOption(price_options[index].options)
+            setVariationOption(priceOptions[index].options)
             setSelectedVariation(index)
         }
     }
@@ -53,11 +52,22 @@ const ProductDetail = (props) => {
     }
 
     useEffect(()=> {
-        setProductImage(props.product.photos.reverse())
+        formatProductImages()
+        setVariationOption(priceOptions[0].options)
     }, [props.product])
 
+    const formatProductImages = () => {
+        let imageArrObj = []
+        productImages.map(item => {
+            imageArrObj.push(
+                { url: item }
+            )
+        })
+        setProductImage(imageArrObj)
+    }
+
     const renderVariation = () => {
-        return variations.map((item, index) => {
+        return priceOptions.map((item, index) => {
             return (
                 <TouchableOpacity
                     activeOpacity={0.9}
@@ -68,7 +78,7 @@ const ProductDetail = (props) => {
                         styles.variationText,
                         selectedVariation == index && styles.selectedVariationText
                     ]}>
-                    {item.variation_name}
+                    {item.variation}
                     </Text>
                 </TouchableOpacity>
             )
@@ -88,7 +98,7 @@ const ProductDetail = (props) => {
                             styles.variationOptionText,
                             selectedVariationOption == item && styles.selectedVariationOptionText
                         ]}>
-                        {item.option_name}
+                        {item.option}
                     </Text>
                 </TouchableOpacity>
             )
@@ -106,7 +116,7 @@ const ProductDetail = (props) => {
                     onSnapToItem={i => setActiveTab(i)}
                 />
                 <Pagination
-                    dotsLength={props.product.photos.length}
+                    dotsLength={productImages.length}
                     containerStyle={styles.pagination}
                     dotStyle={styles.ww}
                     inactiveDotOpacity={0.4}
@@ -124,8 +134,8 @@ const ProductDetail = (props) => {
         <ScrollView style={{ padding: 0, backgroundColor: '#fff' }}>
             { renderCarousel }
             <View style={styles.productDetailWrapper}>
-                <Text style={styles.productDetailName}>{ product_name }</Text>
-                <Text style={styles.productDetailPrice}>P { price ? price : price_options[0].options[0].price }</Text>
+                <Text style={styles.productDetailName}>{ productName }</Text>
+                <Text style={styles.productDetailPrice}>P { price ? price : priceOptions[0].options[0].price }</Text>
             </View>
             <ScrollView
                 style={styles.variationWrapper}
@@ -155,7 +165,7 @@ const ProductDetail = (props) => {
                         tabBarUnderlineStyle={styles.tabBarUnderlineStyle}
                     >
                         <View style={styles.productDetailDescription}>
-                            <Text style={styles.productDetailDescriptionText}>{ product_descriptions }</Text>
+                            <Text style={styles.productDetailDescriptionText}>{ descriptions }</Text>
                         </View>
                     </Tab>
                     <Tab
@@ -175,7 +185,7 @@ const ProductDetail = (props) => {
             </View>
             <View style={styles.btnWishListWrapper}>
                 <Button style={styles.btnWishList} large rounded>
-                    <Text style={styles.btnWishListText}>Add to wish list</Text>
+                    <Text style={styles.btnWishListText}>ADD TO CART</Text>
                 </Button>
             </View>
         </ScrollView>

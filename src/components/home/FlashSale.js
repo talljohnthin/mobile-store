@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux'
 import { getAllProducts } from '../../redux/actions/product/productActions'
+import { getSegments } from '../../redux/actions/segment/segmentActions'
 import { View, SafeAreaView, FlatList , TouchableOpacity } from 'react-native'
 import ProductHorizontal from '../products/ProductHorizontal'
 import { Spinner } from 'native-base'
@@ -18,6 +19,7 @@ const FlashSale = (props) => {
 
     useEffect(() => {
         props.getAllProducts()
+        props.getSegments()
     },[])
 
     useEffect(() => {
@@ -60,6 +62,6 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = { getAllProducts }
+const mapDispatchToProps = { getAllProducts, getSegments }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(FlashSale))

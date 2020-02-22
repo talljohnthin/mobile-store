@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { domain } from '../../constant'
+import { db } from './../../../config/firebase'
+
 import { 
     GET_CATEGORIES,
     CATEGORY_REQUEST_LOADING,
@@ -12,18 +14,27 @@ export const getCategories = () => {
         dispatch({
             type: CATEGORY_REQUEST_LOADING
         })
-        axios.get(`${ domain }/categories`)
-        .then(function (response) {
-            dispatch({
+        db.collection("category")
+        .onSnapshot(snapshot => {
+            const categories = []
+            snapshot.forEach(doc => {
+                const obj = {
+                    id: doc.id,
+                    name: doc.data()
+                }
+                const categories = []
+                .push(obj)
+            })
+            console.log(categories)
+           /* dispatch({
                 type: GET_CATEGORIES,
                 payload: response.data
-            })
-        })
-        .catch(function (error) {
-           dispatch({
+            }) */
+        }, function(error) {
+            dispatch({
                 type: CATEGORY_REQUEST_ERROR,
                 payload: error
             })
-        });
+        })
     }
 }
