@@ -22,14 +22,12 @@ export const getCategories = () => {
                     id: doc.id,
                     name: doc.data()
                 }
-                const categories = []
-                .push(obj)
+                categories.push(obj)
             })
-            console.log(categories)
-           /* dispatch({
+           dispatch({
                 type: GET_CATEGORIES,
-                payload: response.data
-            }) */
+                payload: categories
+            })
         }, function(error) {
             dispatch({
                 type: CATEGORY_REQUEST_ERROR,

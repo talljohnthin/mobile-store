@@ -5,15 +5,18 @@ import { PersistGate } from 'redux-persist/integration/react'
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
 import * as Font from 'expo-font';
-import { View } from 'react-native';
+import { View} from 'react-native';
 import { StyleProvider, Root } from 'native-base'
 import { createAppContainer } from 'react-navigation'
 import { RootStack } from './src/navigations/BottomTabNavigator'
 
 const { store, persistor } = returnStoreAndPersistor()
 
+console.disableYellowBox = true;
+
 const Application = createAppContainer(RootStack)
 const App = () => {
+   
     const [isFontReady, setIsFontReady] = useState(false)
 
     useEffect(() => {

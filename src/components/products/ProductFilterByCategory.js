@@ -26,8 +26,8 @@ const ProductFilterByCategory = (props) => {
                 numColumns={2} 
                 columnWrapperStyle={{flex: 1,justifyContent: "space-around"}}
                 data={products}
-                renderItem={({ item }) => <Product item={item}  />}
-                keyExtractor={item => item._id.toString()}
+                renderItem={({ item }) => <Product item={item.name} id={item.id}  />}
+                keyExtractor={item => item.id.toString()}
             />
          } else {
             return <Text>No product on this category at this time.</Text>

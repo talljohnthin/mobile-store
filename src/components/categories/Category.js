@@ -9,31 +9,21 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import styles from './Styles'
 
 const Category = (props) => {
-    let category_name = props.item.category_name
-    const categoryId = props.item._id
-    const segmentId = props.segmentId
+    let category_name = props.item.name.name
+    const categoryId = props.item.id
+    const segment = props.segment
     if (category_name.length > 20) {
         category_name = category_name.slice(0, 25) + '...'
     }
-    const url = props.item.photos[0].url
-
     const handleGetProducts = () => {
-        props.requestProductSegmentCategory(segmentId, categoryId)
+        props.requestProductSegmentCategory(segment, category_name)
         props.navigation.navigate('ProductFilterByCategory', { filterCategory: category_name })
     }
     return (
-        <TouchableOpacity activeOpacity={.8} onPress={handleGetProducts}>
+        <TouchableOpacity activeOpacity={.6} onPress={handleGetProducts}>
             <View style={styles.categoryCard}>
-                <View style={styles.categoryImageWrapper}>
-                    <Image
-                        source={{ uri: url, }}
-                        style={styles.categoryImage}
-                    />
-                </View>
                 <View style={styles.categoryDescWrapper}>
-
                     <Text style={styles.categoryName}>{category_name}</Text>
-                    <Text style={styles.categoryTotal}>2000 items</Text>
                 </View>
                 <View style={styles.categoryArrowIconWrapper}>
                     <Icon name={'arrowright'} size={20} />

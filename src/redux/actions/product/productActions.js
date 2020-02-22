@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { domain, axiosConfig  } from '../../constant'
+import { domain, axiosConfig } from '../../constant'
 import { db } from './../../../config/firebase'
-import { 
+import {
     GET_ALL_PRODUCTS,
     GET_PRODUCT,
     PRODUCT_REQUEST_HINT,
@@ -19,61 +19,61 @@ export const getAllProducts = () => {
             type: PRODUCT_REQUEST_LOADING
         })
         db.collection("products")
-        .onSnapshot(snapshot => {
-            const products = []
-            snapshot.forEach(doc => {
-                const obj = {
-                    id: doc.id,
-                    name: doc.data()
-                }
-                products.push(obj)
-            })
-            dispatch({
-                type: GET_ALL_PRODUCTS,
-                payload: products
-            })
-        }, function(error) {
-            dispatch({
-                type: PRODUCT_REQUEST_ERROR,
-                payload: error
-            })
-        });
+            .onSnapshot(snapshot => {
+                const products = []
+                snapshot.forEach(doc => {
+                    const obj = {
+                        id: doc.id,
+                        name: doc.data()
+                    }
+                    products.push(obj)
+                })
+                dispatch({
+                    type: GET_ALL_PRODUCTS,
+                    payload: products
+                })
+            }, function (error) {
+                dispatch({
+                    type: PRODUCT_REQUEST_ERROR,
+                    payload: error
+                })
+            });
     }
 }
 
 export const getProduct = (productId) => {
     return (dispatch) => {
-        dispatch({type: GET_PRODUCT, payload: productId})
+        dispatch({ type: GET_PRODUCT, payload: productId })
     }
 }
 
 export const requestProductHint = (textQuery) => {
     return (dispatch) => {
-              /*
-        db.collection('products')
-        .where('productName', '>=', textQuery)
-        .where('productName', '<=', textQuery + '\uf8ff')
-        .get()
-        .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-                console.log(doc.id, " => ", doc.data());
-            });
-        })
-        .catch(function(error) {
-            console.log("Error getting documents: ", error);
-        });
-      
-  
+        /*
+  db.collection('products')
+  .where('productName', '>=', textQuery)
+  .where('productName', '<=', textQuery + '\uf8ff')
+  .get()
+  .then(function(querySnapshot) {
+  querySnapshot.forEach(function(doc) {
+          console.log(doc.id, " => ", doc.data());
+      });
+  })
+  .catch(function(error) {
+      console.log("Error getting documents: ", error);
+  });
+ 
+ 
 
-        dispatch({
-                type: PRODUCT_REQUEST_HINT,
-                payload: searchResult
-            })
-        
-        dispatch({
-            type: PRODUCT_REQUEST_ERROR,
-            payload: error
-        })*/
+  dispatch({
+          type: PRODUCT_REQUEST_HINT,
+          payload: searchResult
+      })
+  
+  dispatch({
+      type: PRODUCT_REQUEST_ERROR,
+      payload: error
+  })*/
     }
 }
 
@@ -82,48 +82,57 @@ export const searchRequestProducts = (text) => {
         dispatch({
             type: PRODUCT_REQUEST_LOADING
         })
-        axios.post(`${ domain }/products/search`, {
+        axios.post(`${domain}/products/search`, {
             search: text,
         })
-        .then((response) => {
-            dispatch({
-                type: PRODUCT_REQUEST_SEARCH,
-                payload: response.data
-            })
-        }, (error) => {
-            dispatch({
-                type: PRODUCT_REQUEST_ERROR,
-                payload: error
-            })
-        });
+            .then((response) => {
+                dispatch({
+                    type: PRODUCT_REQUEST_SEARCH,
+                    payload: response.data
+                })
+            }, (error) => {
+                dispatch({
+                    type: PRODUCT_REQUEST_ERROR,
+                    payload: error
+                })
+            });
     }
 }
 
-export const requestProductSegmentCategory = (segmentId,categoryId) => {
+export const requestProductSegmentCategory = (segment, category) => {
     return (dispatch) => {
         dispatch({
             type: PRODUCT_REQUEST_LOADING
         })
-        axios.get(`${ domain }/products?segmentid=${ segmentId }&categoryid=${ categoryId }`)
-        .then(function (response) {
-            dispatch({
-                type: PRODUCT_REQUEST_SEGMENT_CATEGORY,
-                payload: response.data
+        db.collection("products")
+            .where("segment", "==", segment)
+            .where("category", "==", category)
+            .get()
+            .then(function(querySnapshot) {
+                const products = []
+                querySnapshot.forEach(function(doc) {
+                    const obj = {
+                        id: doc.id,
+                        name: doc.data()
+                    }
+                    products.push(obj)
+                })
+                console.log(products)
+                dispatch({
+                    type: PRODUCT_REQUEST_SEGMENT_CATEGORY,
+                    payload: products
+                })
             })
-        })
-        .catch(function (error) {
-            console.log(error.message)
-            dispatch({
-                type: PRODUCT_REQUEST_ERROR,
-                payload: error
-            })
-        });
+            .catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
+            
     }
 }
 
 export const showCartModal = (data) => {
     return (dispatch) => {
-        dispatch({type: SHOW_CART_MODAL, payload: data })
+        dispatch({ type: SHOW_CART_MODAL, payload: data })
     }
 }
 

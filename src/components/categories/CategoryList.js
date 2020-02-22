@@ -14,32 +14,17 @@ import {
 import styles from './Styles'
 const CategoryList = (props) => {
     const [categories, setCategories] = useState([])
-    const segmentId = props.segmentId
+    const segment = props.segment
     useEffect(() => {
        props.categories.length > 0 ? props.cancelLoading() : props.getCategories()
+       props.categories.length > 0 && setCategories(props.categories)
     },[])
-
-    useEffect(() => {
-        filterSegment()
-    }, [props.categories])
-
-    const filterSegment = ( ) => {
-        const filteredCategory = props.categories.filter(item => {
-            const findCategory = item.segment_id.find( i => i.segment_id == segmentId)
-            if ( findCategory === 'undefined') {
-                return 
-            } else {
-                return findCategory
-            }
-        })
-        setCategories(filteredCategory)
-    }
 
     const listCategories = props.loading ? <Spinner style={styles.spinner} color={fifthColor} /> : (
         <FlatList
             data={categories}
-            renderItem={({ item }) => <Category item={item} segmentId={segmentId} />}
-            keyExtractor={item => item._id.toString()}
+            renderItem={({ item }) => <Category item={item} segment={segment} />}
+            keyExtractor={item => item.id.toString()}
         />
     )
     return (

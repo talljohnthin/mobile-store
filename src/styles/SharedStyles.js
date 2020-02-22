@@ -21,8 +21,8 @@ export default SharedStyles = StyleSheet.create({
         backgroundColor:'transparent'
     },
     tabHeadingText: {
-        fontSize:15,
-        marginLeft:7
+        fontSize:16,
+        marginLeft:0
     },
     activeTextStyle: {
         color: primaryColor,

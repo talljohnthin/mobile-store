@@ -17,40 +17,26 @@ export default Styles = StyleSheet.create({
     },
     categoryCard: {
         width: '100%',
-        marginTop:20,
         position:'relative',
         flex:1,
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'flex-start',
-        paddingLeft:20
-    },
-    categoryImageWrapper: {
-        backgroundColor:"#ededed",
-        borderRadius:6,
-        overflow:'hidden',
-        width: 100, 
-        height:90
-    },
-    categoryImage: {
-        width: 100, 
-        height:90
+        paddingLeft:20,
+        paddingTop:16,
+        paddingBottom:16,
+        borderBottomWidth:1,
+        borderColor:'#efefef',
     },
     categoryDescWrapper: {
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        width: 190
     },
     categoryName: {
-        fontFamily: tertiaryFont,
-        fontSize:17,
-        lineHeight:17,
-        paddingTop:7,
-        width:'85%'
-    },
-    categoryTotal: {
-        color:"#c2c2c2",
-        fontSize:17,
-        marginTop:-2,
+        fontFamily: primaryFont,
+        fontSize:16,
+        paddingTop:0,
         width:'85%'
     },
     categoryArrowIconWrapper: {
@@ -60,5 +46,4 @@ export default Styles = StyleSheet.create({
         justifyContent:'flex-end',
         paddingRight:20
     }
-
 });
