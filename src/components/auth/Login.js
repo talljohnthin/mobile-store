@@ -50,11 +50,11 @@ const Login = (props) => {
                     <Form style={AuthStyles.form}>
                         <Item style={AuthStyles.item}>
                             <Icon active name='ios-mail' style={AuthStyles.IconStyle}/>
-                            <Input placeholder='Email Address' value={email} onChangeText={text => setEmail(text)} style={AuthStyles.input}/>
+                            <Input placeholder='Email Address' autoCapitalize={false} autoCorrect={false} value={email} onChangeText={text => setEmail(text)} style={AuthStyles.input}/>
                         </Item>
                         <Item style={AuthStyles.item}>
                             <Icon active name='ios-lock' style={AuthStyles.IconStyle}/>
-                            <Input placeholder='Password' value={password} onChangeText={text => setPassword(text)} password={true} secureTextEntry={true} style={AuthStyles.input}/>
+                            <Input placeholder='Password' autoCapitalize={false} autoCorrect={false} value={password} onChangeText={text => setPassword(text)} password={true} secureTextEntry={true} style={AuthStyles.input}/>
                         </Item>
                         <TouchableOpacity activeOpacity={0.9}>
                             <Text style={AuthStyles.forgotPassword} >Forgot Password?</Text>

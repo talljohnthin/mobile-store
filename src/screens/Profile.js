@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {connect} from 'react-redux'
 import { View } from 'react-native'
-import { logoutUser, userLoading } from './../redux/actions/user/userActions'
+import { logoutUser, userLoading, signIn } from './../redux/actions/user/userActions'
 import User from './../components/profile/User'
 import Orders from './../components/profile/Orders'
 import UserOptions from './../components/profile/UserOptions'
 import Text from './../utils/Text'
 import { Button,  Spinner } from 'native-base'
+import firebase from './../config/firebase'
 
 import styles from './../components/profile/Styles'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
@@ -19,6 +20,28 @@ const Profile = (props) => {
         props.userLoading()
         setIsLoading(!isLoading)
         props.logoutUser(props.token)
+    }
+
+    useEffect(() => {
+        authState()
+    })
+
+    const authState = () => {
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                const name = user.displayName;
+                const email = user.email;
+                const uid = user.uid;
+                const userObj = {
+                    name,
+                    email,
+                    uid
+                }
+                props.signIn(userObj)
+            } else {
+     
+            }
+        });
     }
 
     return (
@@ -56,7 +79,7 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = { userLoading, logoutUser }
+const mapDispatchToProps = { userLoading, logoutUser, signIn }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
 

@@ -9,6 +9,11 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import { withNavigation } from 'react-navigation'
 import { TouchableOpacity} from 'react-native-gesture-handler';
 
+import {
+    fifthColor,
+    tertiaryFont,
+} from '../../styles/Variables'
+
 const Products = (props) => {
 
     const [products, setProducts] = useState([])
@@ -45,9 +50,6 @@ const Products = (props) => {
 Products.navigationOptions = ({ navigation }) => ({
     headerRight: () => (
         <View style={styles.searchAndFilter}>
-            <TouchableOpacity activeOpacity={0.9} onPress={ () => navigation.navigate('Search')}>
-                <Icon style={styles.searchIcon} name={'search1'} size={25} />
-            </TouchableOpacity>
             <TouchableOpacity activeOpacity={0.9} onPress={ () => navigation.navigate('Filter')}>
                 <Icon style={styles.filterIcon} name={'filter'} size={25} />
             </TouchableOpacity>
