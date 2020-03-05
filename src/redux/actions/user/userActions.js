@@ -55,11 +55,44 @@ export const addUser = (email, password) => {
         firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .catch(function(error) {
+        .then(response => {
+            dispatch({
+                type: ADD_USER,
+                payload: 'User created successfully!'
+            })
+        })
+        .catch(error => {
             dispatch({
                 type: USER_ERROR,
                 payload: error.message
             })
+        });
+    }
+}
+
+export const updateUser = ( fullName ) => {
+    return (dispatch) => {
+        const user = firebase.auth().currentUser;
+        user.updateProfile({
+        displayName: fullName
+        }).then(() => {
+            const updatedUser = firebase.auth().currentUser;
+            if (updatedUser) {
+                const name = user.displayName;
+                const email = user.email;
+                const uid = user.uid;
+                const userObj = {
+                    name,
+                    email,
+                    uid
+                }
+                dispatch({
+                    type: LOGIN_USER,
+                    payload: userObj
+                })
+            }
+        }).catch(error => {
+            console.log(error.message)
         });
     }
 }

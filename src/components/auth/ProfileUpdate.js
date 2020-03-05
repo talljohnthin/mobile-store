@@ -10,18 +10,15 @@ import { withNavigation } from 'react-navigation'
 
 
 const ProfileUpdate = (props) => {
-    const [uid] = useState(props.user.id)
-    const [token] = useState(props.user.token)
-    const [email, setEmail] = useState(props.user.email)
-    const [username, setUsername] = useState(props.user.username)
-    const [deliveryName, setDeliveryName] = useState(props.user.delivery_name)
-    const [deliveryAddress, setDeliveryAddress] = useState(props.user.delivery_address)
+    const [uid] = useState(props.user.uid)
+    //const [email, setEmail] = useState(props.user.email)
+    const [fullName, setFullName] = useState(props.user.name)
     const [isLoading, setIsLoading] = useState(false)
 
     const handleUpdateUser = () => {
         props.userLoading()
         setIsLoading(!isLoading)
-        props.updateUser(uid, email, username, deliveryName, deliveryAddress, token)
+        props.updateUser(fullName)
     }
 
     useEffect(() => {
@@ -41,20 +38,8 @@ const ProfileUpdate = (props) => {
                 <View>
                     <Form style={AuthStyles.form}>
                         <Item style={AuthStyles.item}>
-                            <Icon active name='ios-mail' style={AuthStyles.IconStyle}/>
-                            <Input value={ email } onChangeText={text => setEmail(text)} placeholder='Email Address' style={AuthStyles.input}/>
-                        </Item>
-                        <Item style={AuthStyles.item}>
                             <Icon active name='ios-person' style={AuthStyles.IconStyle}/>
-                            <Input value={ username } onChangeText={text => setUsername(text)} placeholder='Username' style={AuthStyles.input}/>
-                        </Item>
-                        <Item style={AuthStyles.item}>
-                            <Icon active name='ios-person' style={AuthStyles.IconStyle}/>
-                            <Input value={ deliveryName } onChangeText={text => setDeliveryName(text)} placeholder='Delivery Name' style={AuthStyles.input}/>
-                        </Item>
-                        <Item style={AuthStyles.item}>
-                            <Icon active name='ios-navigate' style={AuthStyles.IconStyle}/>
-                            <Textarea value={ deliveryAddress } onChangeText={text => setDeliveryAddress(text)} style={[AuthStyles.input, AuthStyles.textArea]} placeholder="Delivery Address" />
+                            <Input value={ fullName } onChangeText={text => setFullName(text)} placeholder='Full Name' style={AuthStyles.input}/>
                         </Item>
                         <Button 
                             style={AuthStyles.buttonSolid}

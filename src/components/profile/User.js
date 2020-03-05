@@ -5,7 +5,7 @@ import { View, Text, Image } from 'react-native'
 import styles from './Styles'
 const User = (props) => {
     const hasPicture = false
-    const nameFirstChar = props.user.username || 'G'
+    const nameFirstChar = props.user.name || 'G'
 
     const avatar = hasPicture ? 
         <Image 
@@ -20,7 +20,7 @@ const User = (props) => {
                { avatar }
             </View>
             <View style={styles.userDescWrapper}>
-                <Text style={styles.userName}>{props.user.username || 'Guess'}</Text>
+                <Text style={styles.userName}>{props.user.name || 'Guess'}</Text>
                 <Text style={styles.userEmail}>{props.user.email || 'Profile'}</Text>
             </View>
         </View>

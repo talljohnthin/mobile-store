@@ -54,7 +54,7 @@ const Login = (props) => {
                         </Item>
                         <Item style={AuthStyles.item}>
                             <Icon active name='ios-lock' style={AuthStyles.IconStyle}/>
-                            <Input placeholder='Password' autoCapitalize={false} autoCorrect={false} value={password} onChangeText={text => setPassword(text)} password={true} secureTextEntry={true} style={AuthStyles.input}/>
+                            <Input placeholder='Password' autoCapitalize="none" autoCorrect={false} value={password} onChangeText={text => setPassword(text)} password={true} secureTextEntry={true} style={AuthStyles.input}/>
                         </Item>
                         <TouchableOpacity activeOpacity={0.9}>
                             <Text style={AuthStyles.forgotPassword} >Forgot Password?</Text>

@@ -19,7 +19,7 @@ const Profile = (props) => {
     const handleLogOut = () => {
         props.userLoading()
         setIsLoading(!isLoading)
-        props.logoutUser(props.token)
+        props.logoutUser()
     }
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const Profile = (props) => {
     })
 
     const authState = () => {
-        firebase.auth().onAuthStateChanged(function(user) {
+        firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 const name = user.displayName;
                 const email = user.email;
@@ -60,8 +60,8 @@ const Profile = (props) => {
                 </Button>
                 <Button 
                     style={[styles.buttonEditUser, !props.isLogin && {display: 'none'}]}
-                    onPress={ () => console.log('update user') } >
-                    <Text style={styles.buttonTextColor}>EDIT USER</Text>
+                    onPress={ () => props.navigation.navigate('ProfileUpdate') } >
+                    <Text style={styles.buttonTextColor}>UPDATE USER</Text>
                 </Button>
             </View>
             { props.isLogin ? null : <TouchableOpacity style={styles.signUpWrapper} activeOpacity={0.9} onPress={ () => props.navigation.navigate('SignUp')}><Text style={AuthStyles.signUp} >Don't have an account? <Text  style={AuthStyles.signUpText}>Sign Up</Text></Text></TouchableOpacity> }
