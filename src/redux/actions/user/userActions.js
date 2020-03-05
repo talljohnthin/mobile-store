@@ -30,7 +30,7 @@ export const signIn = (user) => {
     }
 }
 
-export const logoutUser = (token) => {
+export const logoutUser = () => {
     return (dispatch) => {
         firebase.auth()
         .signOut()
@@ -52,11 +52,14 @@ export const logoutUser = (token) => {
 
 export const addUser = (email, password) => {
     return (dispatch) => {
-        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
+        firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .catch(function(error) {
+            dispatch({
+                type: USER_ERROR,
+                payload: error.message
+            })
         });
     }
 }

@@ -38,8 +38,6 @@ const Profile = (props) => {
                     uid
                 }
                 props.signIn(userObj)
-            } else {
-     
             }
         });
     }
@@ -59,6 +57,11 @@ const Profile = (props) => {
                     style={[styles.buttonLogout, !props.isLogin && {display: 'none'}]}
                     onPress={ () => handleLogOut() } >
                     { props.loading ? <Spinner color='#fff' /> : <Text style={styles.buttonTextColor}>LOGOUT</Text> }
+                </Button>
+                <Button 
+                    style={[styles.buttonEditUser, !props.isLogin && {display: 'none'}]}
+                    onPress={ () => console.log('update user') } >
+                    <Text style={styles.buttonTextColor}>EDIT USER</Text>
                 </Button>
             </View>
             { props.isLogin ? null : <TouchableOpacity style={styles.signUpWrapper} activeOpacity={0.9} onPress={ () => props.navigation.navigate('SignUp')}><Text style={AuthStyles.signUp} >Don't have an account? <Text  style={AuthStyles.signUpText}>Sign Up</Text></Text></TouchableOpacity> }

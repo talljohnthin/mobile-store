@@ -11,16 +11,20 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const SignUp = (props) => {
     const [email, setEmail] = useState('')
-    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [deliveryName, setDeliveryName] = useState('')
-    const [deliveryAddress, setDeliveryAddress] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        if (props.isLogin) {
+            props.navigation.navigate('Profile')
+        }
+    }, [props.isLogin])
 
     const handleCreateUser = () => {
         props.userLoading()
         setIsLoading(!isLoading)
-        props.addUser(email, username, password, deliveryName, deliveryAddress)
+        props.addUser(email, password)
+
     }
 
     useEffect(() => {
@@ -44,20 +48,8 @@ const SignUp = (props) => {
                             <Input value={ email } onChangeText={text => setEmail(text)} placeholder='Email Address' style={AuthStyles.input}/>
                         </Item>
                         <Item style={AuthStyles.item}>
-                            <Icon active name='ios-person' style={AuthStyles.IconStyle}/>
-                            <Input value={ username } onChangeText={text => setUsername(text)} placeholder='Username' style={AuthStyles.input}/>
-                        </Item>
-                        <Item style={AuthStyles.item}>
                             <Icon active name='ios-lock' style={AuthStyles.IconStyle}/>
                             <Input value={ password } onChangeText={text => setPassword(text)} placeholder='Password' password={true} secureTextEntry={true} style={AuthStyles.input}/>
-                        </Item>
-                        <Item style={AuthStyles.item}>
-                            <Icon active name='ios-person' style={AuthStyles.IconStyle}/>
-                            <Input value={ deliveryName } onChangeText={text => setDeliveryName(text)} placeholder='Delivery Name' style={AuthStyles.input}/>
-                        </Item>
-                        <Item style={AuthStyles.item}>
-                            <Icon active name='ios-navigate' style={AuthStyles.IconStyle}/>
-                            <Textarea value={ deliveryAddress } onChangeText={text => setDeliveryAddress(text)} style={[AuthStyles.input, AuthStyles.textArea]} placeholder="Delivery Address" />
                         </Item>
                         <Button 
                             style={AuthStyles.buttonSolid}
@@ -78,6 +70,7 @@ SignUp.navigationOptions = {
 const mapStateToProps = state => {
     return {
         loading: state.user.loading,
+        isLogin: state.user.isLogin,
         status: state.user.status,
         message: state.user.message,
     }

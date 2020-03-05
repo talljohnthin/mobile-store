@@ -155,6 +155,16 @@ export default Styles = StyleSheet.create({
         borderRadius:50,
         backgroundColor:primaryColor,
     },
+    buttonEditUser: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        fontFamily : primaryFont,
+        height:60,
+        borderRadius:50,
+        marginTop:10,
+        backgroundColor:fifthColor,
+    },
     buttonTextColor: {
         color: '#fff',
         fontFamily:tertiaryFont,
