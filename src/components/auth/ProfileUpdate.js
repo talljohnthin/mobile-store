@@ -19,6 +19,9 @@ const ProfileUpdate = (props) => {
         props.userLoading()
         setIsLoading(!isLoading)
         props.updateUser(fullName)
+        setTimeout(()=>{
+            props.navigation.navigate('Profile')
+        }, 500)
     }
 
     useEffect(() => {

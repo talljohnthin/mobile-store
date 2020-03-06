@@ -105,6 +105,17 @@ const ProductDetail = (props) => {
         })
     }
 
+    const addToBasket = () => {
+        const productObj = {
+            name: productName,
+            price: price, 
+            variation: variationOption[selectedVariation],
+            option: selectedVariationOption.option,
+            cover: 'image'
+        }
+        console.log(productObj)
+    }
+
     const carousel = () => {
         return (
             <Fragment>
@@ -184,7 +195,7 @@ const ProductDetail = (props) => {
 
             </View>
             <View style={styles.btnWishListWrapper}>
-                <Button style={styles.btnWishList} large rounded>
+                <Button style={styles.btnWishList} large rounded onPress={()=> addToBasket()}>
                     <Text style={styles.btnWishListText}>ADD TO CART</Text>
                 </Button>
             </View>
