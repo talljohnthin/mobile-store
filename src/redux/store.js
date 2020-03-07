@@ -7,7 +7,7 @@ import thunkMiddleware from 'redux-thunk'
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ['user']
+    whitelist: ['user', 'basket']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

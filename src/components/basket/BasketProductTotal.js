@@ -3,11 +3,14 @@ import { connect } from 'react-redux'
 import { View} from 'react-native'
 import { Button } from 'native-base'
 import Text from '../../utils/Text'
+import { showToast } from './../../helpers'
 
 import styles from './Styles'
 import SharedStyles from '../../styles/SharedStyles'
 
-const BasketProductTotal = ({basketTotal}) => {
+const BasketProductTotal = (props) => {
+    const {basketTotal, showModal, user, navigation} = props
+
     const formatMoney = (amount, decimalCount = 2, decimal = ".", thousands = ",") => {
         try {
           decimalCount = Math.abs(decimalCount);
@@ -21,6 +24,15 @@ const BasketProductTotal = ({basketTotal}) => {
         }
     };
     const formatedValue = formatMoney(basketTotal)
+    const handleContinueOrder = () => {
+        
+        if(user.isLogin) {
+            showModal()
+        } else {
+           showToast('Sign-In to continue', 'error')
+           navigation.navigate('Login')
+        }
+    }
     return (
         <View style={styles.wishSumWrapper}>
             <View style={styles.wishShipping}>
@@ -31,7 +43,7 @@ const BasketProductTotal = ({basketTotal}) => {
                 <Text style={styles.wishSumValue}>&#8369; {formatedValue}</Text>
             </View>
             <View style={styles.buttonWrapper}>
-                <Button style={[SharedStyles.buttonSolid, styles.btnOrder]}><Text style={[SharedStyles.buttonTextColor, styles.btnOrderText]}>Order Now</Text></Button>
+                <Button style={[SharedStyles.buttonSolid, styles.btnOrder]} onPress={()=> handleContinueOrder()}><Text style={[SharedStyles.buttonTextColor, styles.btnOrderText]}>Order Now</Text></Button>
             </View>
         </View>
     )
@@ -39,7 +51,8 @@ const BasketProductTotal = ({basketTotal}) => {
 
 const mapStateToProps = state => {
     return {
-        basketTotal:state.basket.basketTotal
+        basketTotal:state.basket.basketTotal,
+        user: state.user
     }
 }
 

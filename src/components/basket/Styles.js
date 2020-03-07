@@ -153,7 +153,8 @@ export default Styles = StyleSheet.create({
         textTransform:'capitalize',
         letterSpacing:0,
         color:'#fff',
-        fontSize:18
+        fontSize:17,
+        fontFamily: primaryFont,
     },
     //empty basket
     basketEmptyWrapper: {

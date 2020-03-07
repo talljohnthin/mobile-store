@@ -102,7 +102,7 @@ export default Styles = StyleSheet.create({
     ordersBadge: {
         position:'absolute',
         right:5,
-        width:20,
+        width:'auto',
         height:20,
         justifyContent:'center',
         alignItems:'center',
@@ -175,5 +175,28 @@ export default Styles = StyleSheet.create({
     signUpWrapper: {
         marginBottom:20,
         marginTop:-40
+    },
+    //form
+    form : {
+        padding:0
+    },
+    item : {
+        paddingBottom:4,
+        marginLeft:0,
+        borderBottomWidth:1,
+        borderColor:'#eee',
+        justifyContent:'flex-start',
+        alignItems: 'flex-start'
+    },
+    input : {
+        fontFamily : primaryFont,
+        fontSize : 17,
+        marginTop:8,
+    },
+    textArea: {
+        height:140,
+        paddingLeft:0,
+        paddingTop:8,
+        width:'100%'
     }
 });

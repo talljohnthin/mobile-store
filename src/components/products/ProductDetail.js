@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { getProduct } from './../../redux/actions/product/productActions'
 import { addToBasket, sumProductsInBasket } from './../../redux/actions/basket/basketActions'
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -179,7 +179,7 @@ const ProductDetail = (props) => {
             { renderCarousel }
             <View style={styles.productDetailWrapper}>
                 <Text style={styles.productDetailName}>{ productName }</Text>
-                <Text style={styles.productDetailPrice}>P { price ? price : priceOptions[0].options[0].price }</Text>
+                <Text style={styles.productDetailPrice}>&#8369;{ price ? price : priceOptions[0].options[0].price }</Text>
             </View>
             <ScrollView
                 style={styles.variationWrapper}

@@ -10,6 +10,8 @@ import styles from './Styles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const Orders = (props) => {
+    const { basket } = props
+    const basketBadgeCount = basket.length
     return (
         <View style={styles.ordersWrapper}>
             <Text  style={styles.orderTitle} >My Order</Text>
@@ -18,9 +20,11 @@ const Orders = (props) => {
                     <View style={styles.ordersStatus}>
                         <Icon style={styles.iconBag} name="shoppingcart"/>
                         <Text style={styles.ordersLabel}> Basket </Text>
-                        <Badge warning style={styles.ordersBadge}>
-                            <Text style={styles.ordersBadgeText}>2</Text>
-                        </Badge>
+                        { 
+                            basketBadgeCount >= 1 ? <Badge warning style={styles.ordersBadge}>
+                                <Text style={styles.ordersBadgeText}>{basketBadgeCount}</Text>
+                            </Badge> : null
+                        }
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={!props.isLogin && {display:'none'}}>
@@ -48,7 +52,8 @@ const Orders = (props) => {
 
 const mapStateToProps = state => {
     return {
-        isLogin: state.user.isLogin
+        isLogin: state.user.isLogin,
+        basket:state.basket.basket
     }
 }
 
