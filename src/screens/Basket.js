@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { orderProducts } from './../redux/actions/order/orderActions'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
-import { Button, Form, Item, Input, Textarea, CheckBox } from 'native-base'
+import {Root, Button, Form, Item, Input, Textarea, CheckBox } from 'native-base'
 import { SafeAreaView, FlatList, Text, View, Modal, TouchableOpacity, StyleSheet } from 'react-native'
 import BasketProduct from '../components/basket/BasketProduct'
 import BasketProductTotal from '../components/basket/BasketProductTotal'
 import styles from '../components/basket/Styles'
-import * as Random from 'expo-random';
+import { showToast } from './../helpers'
 
 import {
     primaryColor,
@@ -21,6 +21,15 @@ import {
     tertiaryFont
 } from './../styles/Variables'
 
+const mobileNumberValidtor = (number) => {
+    const commaSpaceDot = /[.,\s]/g;
+    const result = number.toString().replace(commaSpaceDot, '')
+      if(result.length >=10 && result.length <= 11) {
+          return true
+    } else {
+          return false
+    }
+}
 
 const Basket = (props) => {
     const { basket, basketTotal, navigation, user, orderProducts } = props
@@ -29,15 +38,12 @@ const Basket = (props) => {
     const [ address, setAddress] = useState('')
     const [ useProfile, setUseProfile] = useState(false)
     const [ showModal, setShowModal ] = useState(false)
-    const [ randomId, setRandomId] = useState(false)
 
-    useEffect(()=> {
-        setRandomId(randomBytesId())
-    },[])
 
     const handleShowModal = () => {
         setShowModal(!showModal)
     }
+
     const handleUseProfile = () => {
         if(user) {
             if(!useProfile) {
@@ -49,10 +55,7 @@ const Basket = (props) => {
             }
         }
     }
-    const randomBytesId = async() => {
-        return await Random.getRandomBytesAsync(16);
-    }
-    
+
     const handleOrderProducts = () => {
         const orderObj = {
             transaction_id : `${user.uid}${Date.parse(new Date())}${Math.random() * 100000}`.replace(".",""), 
@@ -68,11 +71,19 @@ const Basket = (props) => {
             status:"on review",
             notes:"notes"
         }
-        orderProducts(orderObj)
+        // check phone number
+        console.log(orderObj.shipping_details.phone)
+        if (mobileNumberValidtor(orderObj.shipping_details.phone) === false) {
+            showToast("Ohh no.. Your mobile number is invalid!", "error")
+            return
+        }
+        console.log('order success')
+        //orderProducts(orderObj)
     }
+
     const isBasketEmpty = () => {
         if (basket.length) {
-            return <SafeAreaView style={styles.wishWrapper}>
+            return<SafeAreaView style={styles.wishWrapper}>
                 <FlatList
                     contentContainerStyle={{ paddingBottom: 100 }}
                     data={basket}
@@ -87,6 +98,7 @@ const Basket = (props) => {
                     onRequestClose={() => {
                         setShowModal(!showModal)
                     }}>
+                    <Root>
                     <View>
                         <Form style={Styles.form}>
                             <Text style={Styles.formTitle}>Add shipping details: </Text>
@@ -132,6 +144,7 @@ const Basket = (props) => {
                             </Button>
                         </Form>
                     </View>
+                    </Root>
                 </Modal>
             </SafeAreaView>
         } else {
