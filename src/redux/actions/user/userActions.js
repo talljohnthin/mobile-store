@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { domain, axiosConfig } from './../../constant'
 import firebase from './../../../config/firebase'
 import { 
     USER_LOADING,

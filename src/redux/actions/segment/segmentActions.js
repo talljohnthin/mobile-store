@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { domain } from '../../constant'
 import { db } from './../../../config/firebase'
 import { 
     GET_SEGMENTS,

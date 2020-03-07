@@ -1,0 +1,4 @@
+export const ORDER_PRODUCTS = 'ORDER_PRODUCTS'
+export const ORDER_LOADING = 'ORDER_LOADING'
+export const ORDER_ERROR = 'ORDER_ERROR'
+

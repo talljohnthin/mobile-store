@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/AntDesign'
+import { orderProducts } from './../redux/actions/order/orderActions'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import { Button, Form, Item, Input, Textarea, CheckBox } from 'native-base'
 import { SafeAreaView, FlatList, Text, View, Modal, TouchableOpacity, StyleSheet } from 'react-native'
 import BasketProduct from '../components/basket/BasketProduct'
 import BasketProductTotal from '../components/basket/BasketProductTotal'
 import styles from '../components/basket/Styles'
+import * as Random from 'expo-random';
 
 import {
     primaryColor,
@@ -21,12 +23,18 @@ import {
 
 
 const Basket = (props) => {
-    const { basket, navigation, user } = props
+    const { basket, basketTotal, navigation, user, orderProducts } = props
     const [ fullName, setFullName] = useState('')
     const [ phone, setPhone] = useState('')
     const [ address, setAddress] = useState('')
     const [ useProfile, setUseProfile] = useState(false)
     const [ showModal, setShowModal ] = useState(false)
+    const [ randomId, setRandomId] = useState(false)
+
+    useEffect(()=> {
+        setRandomId(randomBytesId())
+    },[])
+
     const handleShowModal = () => {
         setShowModal(!showModal)
     }
@@ -40,6 +48,27 @@ const Basket = (props) => {
                 setFullName('')
             }
         }
+    }
+    const randomBytesId = async() => {
+        return await Random.getRandomBytesAsync(16);
+    }
+    
+    const handleOrderProducts = () => {
+        const orderObj = {
+            transaction_id : `${user.uid}${Date.parse(new Date())}${Math.random() * 100000}`.replace(".",""), 
+            uid: user.uid,
+            products : basket,
+            shipping_fee:0,
+            total_amount: basketTotal,
+            shipping_details:{
+                name: fullName,
+                phone,
+                address
+            },
+            status:"on review",
+            notes:"notes"
+        }
+        orderProducts(orderObj)
     }
     const isBasketEmpty = () => {
         if (basket.length) {
@@ -93,7 +122,7 @@ const Basket = (props) => {
                             </Item>
                             <Button
                                 style={styles.btnOrder}
-                                onPress={() => navigation.navigate('Explore')} >
+                                onPress={() => handleOrderProducts() } >
                                 <Text style={styles.btnOrderText}>Order </Text>
                             </Button>
                             <Button
@@ -126,11 +155,14 @@ Basket.navigationOptions = {
 const mapStateToProps = state => {
     return {
         basket: state.basket.basket,
+        basketTotal: state.basket.basketTotal,
         user: state.user.user
     }
 }
 
-export default connect(mapStateToProps)(Basket)
+const mapDispatchToProps = { orderProducts }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Basket)
 
 const Styles = StyleSheet.create({
     //form
