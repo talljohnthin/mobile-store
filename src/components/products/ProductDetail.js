@@ -1,11 +1,13 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import {connect} from 'react-redux'
 import { getProduct } from './../../redux/actions/product/productActions'
+import { addToBasket, sumProductsInBasket } from './../../redux/actions/basket/basketActions'
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { View, StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native'
 import { Tabs, Button, Tab, TabHeading } from 'native-base'
 import Text from '../../utils/Text'
 import { ScrollView } from 'react-native-gesture-handler';
+import { showToast } from './../../helpers'
 
 import {
     primaryColor,
@@ -43,6 +45,7 @@ const ProductDetail = (props) => {
         if ( index !== undefined && index !== '') {
             setVariationOption(priceOptions[index].options)
             setSelectedVariation(index)
+            setSelectedVariationOption('')
         }
     }
 
@@ -107,13 +110,43 @@ const ProductDetail = (props) => {
 
     const addToBasket = () => {
         const productObj = {
+            id: props.product.id,
             name: productName,
             price: price, 
-            variation: variationOption[selectedVariation],
+            variation: priceOptions[selectedVariation].variation,
             option: selectedVariationOption.option,
-            cover: 'image'
+            cover,
+            qty:1,
+            total: Number(price),
         }
-        console.log(productObj)
+        if (productObj.id == '' || productObj.id === null) {
+            showToast('Error: Please close product details and click the product again.', 'error')
+            return
+        }
+        if (productObj.name == '' || productObj.name === null) {
+            showToast('Error: Please close product details and click the product again.', 'error')
+            return
+        }
+        if (productObj.cover == '' || productObj.cover === null) {
+            showToast('Error: Please close product details and click the product again.', 'error')
+            return
+        }
+        if (productObj.variation == '' || productObj.variation === null) {
+            showToast('Error: Please select a variation', 'error')
+            return
+        }
+        if (productObj.option == '' || productObj.option === undefined) {
+            showToast('Error: Please select an option.', 'error')
+            return
+        }
+        if (productObj.price == '' || productObj.price === null) {
+            showToast('Error: Please close product details and click the product again.', 'error')
+            return
+        }
+        props.addToBasket(productObj)
+        showToast('Success: New item added to basket.', 'success')
+        props.sumProductsInBasket()
+        props.navigation.navigate('Explore')
     }
 
     const carousel = () => {
@@ -196,7 +229,7 @@ const ProductDetail = (props) => {
             </View>
             <View style={styles.btnWishListWrapper}>
                 <Button style={styles.btnWishList} large rounded onPress={()=> addToBasket()}>
-                    <Text style={styles.btnWishListText}>ADD TO CART</Text>
+                    <Text style={styles.btnWishListText}>ADD TO BASKET</Text>
                 </Button>
             </View>
         </ScrollView>
@@ -351,6 +384,6 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = { getProduct }
+const mapDispatchToProps = { getProduct, addToBasket, sumProductsInBasket }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail)

@@ -15,7 +15,7 @@ import ProductFilterByCategory from './../components/products/ProductFilterByCat
 import ProfileUpdate from './../components/auth/ProfileUpdate'
 import Categories from './../screens/Categories'
 import Profile from './../screens/Profile'
-import Wishes from './../screens/Wishes'
+import Basket from './../screens/Basket'
 import Explore from './../screens/Explore'
 import ProductDetail from './../components/products/ProductDetail'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
@@ -67,7 +67,7 @@ const ProfileStack = createStackNavigator({
   SignUp: SignUp,
   ForgotEmail: ForgotEmail,
   ResetPassword: ResetPassword,
-  Wishes:Wishes,
+  Basket:Basket,
   ProfileUpdate: ProfileUpdate
 }, {
   defaultNavigationOptions: {

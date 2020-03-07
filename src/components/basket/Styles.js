@@ -85,16 +85,28 @@ export default Styles = StyleSheet.create({
     wishCount: {
         paddingLeft:5,
         paddingRight:5,
-        fontSize:17,
+        fontSize:18,
         color:'#a6a6a6'
     },
     wishPlus: {
         color:'#a6a6a6',
-        fontSize:17
+        fontSize:20
     },
     wishMinus: {
         color:'#a6a6a6',
-        fontSize:17
+        fontSize:20
+    },
+    wishTopWrapper: {
+        width:'100%'
+    },
+    wishRemove: {
+        position:"absolute",
+        right:0,
+        top:-15,
+    },
+    wishRemoveIcon: {
+        fontSize:22,
+        color:'#a6a6a6',
     },
     // wish total
     wishSumWrapper: {
@@ -130,11 +142,47 @@ export default Styles = StyleSheet.create({
     },
     btnOrder: {
         borderRadius:50,
-        height:55,
-        backgroundColor:fifthColor
+        height:60,
+        backgroundColor:fifthColor,
+        alignItems:'center',
+        justifyContent:'center',
+        flexDirection:'row',
+        marginTop:25
     },
     btnOrderText: {
-        textTransform:'uppercase',
+        textTransform:'capitalize',
         letterSpacing:0,
+        color:'#fff',
+        fontSize:18
+    },
+    //empty basket
+    basketEmptyWrapper: {
+        padding:20,
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    basketEmptyText: {
+        fontFamily: primaryFont,
+        fontSize:17,
+        color:'#a6a6a6',
+        textAlign:'center',
+        lineHeight:22,
+        fontWeight:'300'
+    },
+    basketEmptyButton: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        fontFamily : primaryFont,
+        height:60,
+        borderRadius:50,
+        marginTop:10,
+        paddingLeft:30,
+        paddingRight:30,
+        backgroundColor:'#000',
+    },
+    basketEmptyButtonText: {
+        color:'#fff'
     }
 });

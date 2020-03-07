@@ -14,10 +14,10 @@ const Orders = (props) => {
         <View style={styles.ordersWrapper}>
             <Text  style={styles.orderTitle} >My Order</Text>
             <View style={styles.ordersStatusWrapper} >
-                <TouchableOpacity activeOpacity={.8} onPress={ () => props.navigation.navigate('Wishes')}>
+                <TouchableOpacity activeOpacity={.8} onPress={ () => props.navigation.navigate('Basket')}>
                     <View style={styles.ordersStatus}>
-                        <Icon style={styles.iconBag} name="hearto"/>
-                        <Text style={styles.ordersLabel}> WishList </Text>
+                        <Icon style={styles.iconBag} name="shoppingcart"/>
+                        <Text style={styles.ordersLabel}> Basket </Text>
                         <Badge warning style={styles.ordersBadge}>
                             <Text style={styles.ordersBadgeText}>2</Text>
                         </Badge>
