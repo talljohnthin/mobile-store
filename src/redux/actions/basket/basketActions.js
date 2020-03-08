@@ -3,6 +3,7 @@ import {
     ADD_QUANTITY,
     SUBTRACT_QUANTITY,
     REMOVE_TO_BASKET,
+    EMPTY_BASKET,
     SUM_TOTAL_IN_THE_BASKET
 } from './basketTypes'
 
@@ -35,5 +36,10 @@ export const subtractQuantity = (index) => {
 export const sumProductsInBasket = () => {
     return {
         type: SUM_TOTAL_IN_THE_BASKET
+    }
+}
+export const emptyBasket = () => {
+    return {
+        type: EMPTY_BASKET
     }
 }

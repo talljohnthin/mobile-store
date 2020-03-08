@@ -3,7 +3,8 @@ import { db } from './../../../config/firebase'
 import { 
     ORDER_PRODUCTS,
     ORDER_LOADING,
-    ORDER_ERROR
+    ORDER_ERROR,
+    ORDER_SUCCESS
 } from './orderTypes'
 
 export const orderProducts = (orderObj) => {
@@ -13,11 +14,9 @@ export const orderProducts = (orderObj) => {
         })
         db.collection("orders").add(orderObj)
         .then(function(docRef) {
-            console.log("Document written with ID: ", docRef.id);
-            // dispatch({
-            //     type: ORDER_PRODUCTS,
-            //     payload: categories
-            // })
+            dispatch({
+                type: ORDER_SUCCESS
+            })
         })
         .catch(function(error) {
             dispatch({

@@ -2,23 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { orderProducts } from './../redux/actions/order/orderActions'
+import { emptyBasket } from './../redux/actions/basket/basketActions'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import {Root, Button, Form, Item, Input, Textarea, CheckBox } from 'native-base'
 import { SafeAreaView, FlatList, Text, View, Modal, TouchableOpacity, StyleSheet } from 'react-native'
 import BasketProduct from '../components/basket/BasketProduct'
 import BasketProductTotal from '../components/basket/BasketProductTotal'
+import { Loader }  from './../loader/Loader'
 import styles from '../components/basket/Styles'
 import { showToast } from './../helpers'
 
 import {
     primaryColor,
-    secondaryColor,
-    tertiaryColor,
-    fourthColor,
     fifthColor,
     primaryFont,
-    secondaryFont,
-    tertiaryFont
 } from './../styles/Variables'
 
 const mobileNumberValidtor = (number) => {
@@ -32,13 +29,22 @@ const mobileNumberValidtor = (number) => {
 }
 
 const Basket = (props) => {
-    const { basket, basketTotal, navigation, user, orderProducts } = props
+    const { basket, basketTotal, navigation, user, orderProducts, isSuccess, emptyBasket } = props
     const [ fullName, setFullName] = useState('')
     const [ phone, setPhone] = useState('')
     const [ address, setAddress] = useState('')
+    const [ notes, setNotes] = useState('')
     const [ useProfile, setUseProfile] = useState(false)
     const [ showModal, setShowModal ] = useState(false)
+    const [ loading, setLoading] = useState(false)
 
+    useEffect(()=> {
+        if(isSuccess) {
+            setLoading(false)
+            emptyBasket()
+            navigation.navigate('OrderSuccess')
+        }
+    }, [isSuccess])
 
     const handleShowModal = () => {
         setShowModal(!showModal)
@@ -68,17 +74,41 @@ const Basket = (props) => {
                 phone,
                 address
             },
-            status:"on review",
+            status:"On Review",
             notes:"notes"
         }
         // check phone number
-        console.log(orderObj.shipping_details.phone)
         if (mobileNumberValidtor(orderObj.shipping_details.phone) === false) {
             showToast("Ohh no.. Your mobile number is invalid!", "error")
             return
         }
-        console.log('order success')
-        //orderProducts(orderObj)
+        // check address
+        if (orderObj.shipping_details.address.toString().trim().length <= 3) {
+            showToast("Ohh no.. Please add your complete address!", "error")
+            return
+        }
+        // check transaction id
+        if (orderObj.transaction_id == '' || orderObj.transaction_id == null || orderObj.transaction_id === undefined) {
+            showToast("System Error: Restart the app to continue!", "error")
+            return
+        }
+        // check user id
+        if (orderObj.uid == '' || orderObj.uid == null || orderObj.uid === undefined) {
+            showToast("System Error: Restart the app to continue!", "error")
+            return
+        }
+        // check if has order
+        // if (orderObj.basket.length) {
+        //     showToast("No products to order, Go and select a product then at it to basket", "error")
+        //     return
+        // }
+        // check if has order
+        if (orderObj.total_amount == 0 || orderObj.total_amount === undefined || orderObj.total_amount == null) {
+            showToast("System Error: Restart the app to continue!", "error")
+            return
+        }
+        orderProducts(orderObj)
+        setLoading(true)
     }
 
     const isBasketEmpty = () => {
@@ -91,6 +121,7 @@ const Basket = (props) => {
                     keyExtractor={(item, index) => index.toString()}
                     ListFooterComponent={() => <BasketProductTotal showModal={handleShowModal} navigation={ navigation }/>}
                 />
+                <Loader loading={ loading } />
                 <Modal
                     animationType="fade"
                     transparent={false}
@@ -128,7 +159,16 @@ const Basket = (props) => {
                                 <Textarea 
                                     value={ address } 
                                     onChangeText={text => setAddress(text)} 
-                                    placeholder='Complete Delivery Address' 
+                                    placeholder='Delivery Address: Street / Barangay / City / Province' 
+                                    style={Styles.textArea}
+                                />
+                            </Item>
+                            <Item style={Styles.item}>
+                                <EvilIcons name='pencil' style={[Styles.IconStyle, Styles.IconStyleLocation]}/>
+                                <Textarea 
+                                    value={ notes } 
+                                    onChangeText={text => setNotes(text)} 
+                                    placeholder='You can add notes here if you have questions about the order.' 
                                     style={Styles.textArea}
                                 />
                             </Item>
@@ -158,6 +198,7 @@ const Basket = (props) => {
             </SafeAreaView>
         }
     }
+
     return isBasketEmpty()
 }
 
@@ -169,11 +210,12 @@ const mapStateToProps = state => {
     return {
         basket: state.basket.basket,
         basketTotal: state.basket.basketTotal,
-        user: state.user.user
+        user: state.user.user,
+        isSuccess: state.orders.isSuccess
     }
 }
 
-const mapDispatchToProps = { orderProducts }
+const mapDispatchToProps = { orderProducts, emptyBasket }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Basket)
 
@@ -198,7 +240,7 @@ const Styles = StyleSheet.create({
         marginTop:8,
     },
     textArea: {
-        height:200,
+        height:140,
         paddingLeft:0,
         paddingTop:8,
         width:'100%',

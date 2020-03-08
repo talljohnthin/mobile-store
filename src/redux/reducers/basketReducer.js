@@ -3,6 +3,7 @@ import {
     ADD_QUANTITY,
     SUBTRACT_QUANTITY,
     REMOVE_TO_BASKET,
+    EMPTY_BASKET,
     SUM_TOTAL_IN_THE_BASKET,
 } from './../actions/basket/basketTypes'
 
@@ -38,6 +39,11 @@ const reducer = ( state = initialState, action) => {
             return {
                 ...state,
                 basketTotal:sumProductsInBasket(state)
+            }
+        case EMPTY_BASKET :
+            return {
+                ...state,
+                basket: []
             }
         default : return state
     }
