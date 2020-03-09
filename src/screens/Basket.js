@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/AntDesign'
-import { orderProducts } from './../redux/actions/order/orderActions'
+import { orderProducts, orderReset } from './../redux/actions/order/orderActions'
 import { emptyBasket } from './../redux/actions/basket/basketActions'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import {Root, Button, Form, Item, Input, Textarea, CheckBox } from 'native-base'
@@ -29,7 +29,7 @@ const mobileNumberValidtor = (number) => {
 }
 
 const Basket = (props) => {
-    const { basket, basketTotal, navigation, user, orderProducts, isSuccess, emptyBasket } = props
+    const { basket, basketTotal, navigation, user, orderProducts, isSuccess, emptyBasket, orderReset } = props
     const [ fullName, setFullName] = useState('')
     const [ phone, setPhone] = useState('')
     const [ address, setAddress] = useState('')
@@ -40,9 +40,14 @@ const Basket = (props) => {
 
     useEffect(()=> {
         if(isSuccess) {
-            setLoading(false)
-            emptyBasket()
-            navigation.navigate('OrderSuccess')
+           setLoading(false)
+           emptyBasket()
+           setShowModal(false)
+           navigation.navigate('OrderSuccess')
+        }
+        return () => {
+            console.log("Leave: basket")
+            orderReset()
         }
     }, [isSuccess])
 
@@ -97,11 +102,6 @@ const Basket = (props) => {
             showToast("System Error: Restart the app to continue!", "error")
             return
         }
-        // check if has order
-        // if (orderObj.basket.length) {
-        //     showToast("No products to order, Go and select a product then at it to basket", "error")
-        //     return
-        // }
         // check if has order
         if (orderObj.total_amount == 0 || orderObj.total_amount === undefined || orderObj.total_amount == null) {
             showToast("System Error: Restart the app to continue!", "error")
@@ -215,7 +215,7 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = { orderProducts, emptyBasket }
+const mapDispatchToProps = { orderProducts, emptyBasket, orderReset }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Basket)
 

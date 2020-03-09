@@ -1,7 +1,8 @@
 import { 
     ORDER_SUCCESS,
     ORDER_LOADING,
-    ORDER_ERROR
+    ORDER_ERROR,
+    ORDER_RESET
 } from './../actions/order/orderTypes'
 
 
@@ -18,6 +19,13 @@ const reducer = ( state = initialState, action) => {
             return {
                 ...state,
                 isSuccess:true,
+                loading:false,
+                message:''
+            }
+        case ORDER_RESET: 
+            return {
+                ...state,
+                isSuccess:false,
                 loading:false,
                 message:''
             }

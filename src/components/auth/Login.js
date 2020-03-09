@@ -15,9 +15,13 @@ const Login = (props) => {
     const [isLoading, setIsLoading] = useState(false)
     
     const handleLogin = () => {
-        props.userLoading()
-        setIsLoading(!isLoading)
-        props.loginUser(email, password)
+        if (email != '' && password != '') {
+            props.userLoading()
+            setIsLoading(!isLoading)
+            props.loginUser(email, password)
+        } else {
+            showToast("Please add valid Email address & password.", "error")
+        }
     }
 
     useEffect(() => {
@@ -25,7 +29,7 @@ const Login = (props) => {
             showToast(props.message, props.status)
         }
         return function() {
-            props.cleanUserSuccessError()
+           props.cleanUserSuccessError()
         }
     }, [props.message])
 
@@ -50,7 +54,7 @@ const Login = (props) => {
                     <Form style={AuthStyles.form}>
                         <Item style={AuthStyles.item}>
                             <Icon active name='ios-mail' style={AuthStyles.IconStyle}/>
-                            <Input placeholder='Email Address' autoCapitalize={false} autoCorrect={false} value={email} onChangeText={text => setEmail(text)} style={AuthStyles.input}/>
+                            <Input placeholder='Email Address' autoCapitalize="none" autoCorrect={false} value={email} onChangeText={text => setEmail(text)} style={AuthStyles.input}/>
                         </Item>
                         <Item style={AuthStyles.item}>
                             <Icon active name='ios-lock' style={AuthStyles.IconStyle}/>

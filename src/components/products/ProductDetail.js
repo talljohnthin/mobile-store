@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux'
+import { showToast } from './../../helpers'
 import { getProduct } from './../../redux/actions/product/productActions'
 import { addToBasket, sumProductsInBasket } from './../../redux/actions/basket/basketActions'
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -7,7 +8,7 @@ import { View, StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-nat
 import { Tabs, Button, Tab, TabHeading } from 'native-base'
 import Text from '../../utils/Text'
 import { ScrollView } from 'react-native-gesture-handler';
-import { showToast } from './../../helpers'
+
 
 import {
     primaryColor,
@@ -57,6 +58,9 @@ const ProductDetail = (props) => {
     useEffect(()=> {
         formatProductImages()
         setVariationOption(priceOptions[0].options)
+        return () => {
+            console.log('on leave')
+        }
     }, [props.product])
 
     const formatProductImages = () => {
@@ -144,9 +148,9 @@ const ProductDetail = (props) => {
             return
         }
         props.addToBasket(productObj)
-        showToast('Success: New item added to basket.', 'success')
         props.sumProductsInBasket()
         props.navigation.navigate('Explore')
+        showToast('Success: New Product added to bag.', 'success')
     }
 
     const carousel = () => {

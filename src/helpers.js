@@ -1,10 +1,13 @@
-import { Toast } from 'native-base'
+import { ToastAndroid } from 'react-native';
+
 export const showToast = (message, status) => {
     const statusType = status == 'error' ? 'danger' : 'success'
-    Toast.show({
-        text: message,
-        buttonText: "Okay",
-        position:'top',
-        type: statusType   // "success, danger"
-    })
+    ToastAndroid.showWithGravityAndOffset(
+        message,
+        ToastAndroid.SHORT,
+        ToastAndroid.TOP,
+        25,
+        50,
+    );
+    return null;
 }

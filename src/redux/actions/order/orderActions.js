@@ -4,7 +4,8 @@ import {
     ORDER_PRODUCTS,
     ORDER_LOADING,
     ORDER_ERROR,
-    ORDER_SUCCESS
+    ORDER_SUCCESS,
+    ORDER_RESET
 } from './orderTypes'
 
 export const orderProducts = (orderObj) => {
@@ -26,3 +27,9 @@ export const orderProducts = (orderObj) => {
         });
     }
 }
+export const orderReset = () => {
+    return {
+        type: ORDER_RESET
+    }
+}
+

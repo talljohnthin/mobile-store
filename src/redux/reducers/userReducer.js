@@ -65,7 +65,7 @@ const reducer = ( state = initialState, action) => {
             return {
                 ...state,
                 status:'error',
-                message:action.payload.message,
+                message: action.payload,
                 loading:false
             }
         case CLEAN_USER_SUCCESS_ERROR :
