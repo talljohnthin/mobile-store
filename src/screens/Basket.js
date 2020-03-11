@@ -40,13 +40,12 @@ const Basket = (props) => {
 
     useEffect(()=> {
         if(isSuccess) {
-           setLoading(false)
-           emptyBasket()
-           setShowModal(false)
            navigation.navigate('OrderSuccess')
+           setLoading(false)
+           setShowModal(false)
+           emptyBasket()
         }
         return () => {
-            console.log("Leave: basket")
             orderReset()
         }
     }, [isSuccess])

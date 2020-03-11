@@ -17,6 +17,7 @@ import Categories from './../screens/Categories'
 import Profile from './../screens/Profile'
 import Basket from './../screens/Basket'
 import Explore from './../screens/Explore'
+import OrderSuccess from './../components/orders/OrderSuccess'
 import ProductDetail from './../components/products/ProductDetail'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -68,7 +69,8 @@ const ProfileStack = createStackNavigator({
   ForgotEmail: ForgotEmail,
   ResetPassword: ResetPassword,
   Basket:Basket,
-  ProfileUpdate: ProfileUpdate
+  ProfileUpdate: ProfileUpdate,
+  OrderSuccess: OrderSuccess
 }, {
   defaultNavigationOptions: {
     headerStyle: {

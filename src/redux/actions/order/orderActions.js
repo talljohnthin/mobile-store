@@ -1,13 +1,41 @@
 import { db } from './../../../config/firebase'
 
 import { 
-    ORDER_PRODUCTS,
     ORDER_LOADING,
     ORDER_ERROR,
     ORDER_SUCCESS,
-    ORDER_RESET
+    ORDER_RESET,
+    GET_ORDERS
 } from './orderTypes'
 
+export const getOrders = (countLimit) => {
+    return (dispatch) => {
+        dispatch({
+            type: ORDER_LOADING
+        })
+        db.collection("orders")
+        .get()
+        .then(snapshot => {
+            const orders = []
+            snapshot.forEach(doc => {
+                const obj = {
+                    id: doc.id,
+                    name: doc.data()
+                }
+                orders.push(obj)
+            })
+            dispatch({
+                type: GET_ORDERS,
+                payload: orders
+            })
+        }, function (error) {
+            dispatch({
+                type: ORDER_ERROR,
+                payload: error
+            })
+        });
+    }
+}
 export const orderProducts = (orderObj) => {
     return (dispatch) => {
         dispatch({
