@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {connect} from 'react-redux'
 import { View } from 'react-native'
 import { logoutUser, userLoading, signIn } from './../redux/actions/user/userActions'
+import { getOrders } from './../redux/actions/order/orderActions'
 import User from './../components/profile/User'
 import Orders from './../components/profile/Orders'
 import UserOptions from './../components/profile/UserOptions'
@@ -14,6 +15,7 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 
 
 const Profile = (props) => {
+    const { isLogin, uid, orders } = props
     const [isLoading, setIsLoading] = useState(false)
 
     const handleLogOut = () => {
@@ -24,7 +26,10 @@ const Profile = (props) => {
 
     useEffect(() => {
         authState()
-    })
+        if(isLogin) {
+            props.getOrders(uid)
+        }
+    }, [isLogin])
 
     const authState = () => {
         firebase.auth().onAuthStateChanged(user => {
@@ -77,12 +82,13 @@ Profile.navigationOptions = (props) => ({
 const mapStateToProps = state => {
     return {
         isLogin: state.user.isLogin,
-        token:state.user.user.token,
-        loading: state.user.loading
+        uid:state.user.user.uid,
+        loading: state.user.loading,
+        orders: state.orders.orders
     }
 }
 
-const mapDispatchToProps = { userLoading, logoutUser, signIn }
+const mapDispatchToProps = { userLoading, logoutUser, signIn, getOrders }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
 

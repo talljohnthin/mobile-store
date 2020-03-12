@@ -8,12 +8,13 @@ import {
     GET_ORDERS
 } from './orderTypes'
 
-export const getOrders = (countLimit) => {
+export const getOrders = (userId) => {
     return (dispatch) => {
         dispatch({
             type: ORDER_LOADING
         })
         db.collection("orders")
+        .where("uid", "==", userId)
         .get()
         .then(snapshot => {
             const orders = []
