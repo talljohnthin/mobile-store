@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
+import { withNavigation } from 'react-navigation'
 import { Spinner } from 'native-base'
 import { getOrders } from '../../redux/actions/order/orderActions'
 import  { SafeAreaView, FlatList } from 'react-native'
@@ -15,12 +16,12 @@ const OrderList = (props) => {
     const listOrders= props.loading ? <Spinner style={styles.spinner} color={fifthColor} /> : (
         <FlatList
             data={orders}
-            renderItem={({ item }) => <Order item={item} />}
+            renderItem={({ item, index }) => <Order item={item} index={ index + 1} />}
             keyExtractor={item => item.id.toString()}
         />
     )
     return (
-        <SafeAreaView style={styles.categoryWrapper}>
+        <SafeAreaView style={styles.orderWrapper}>
             { listOrders }
         </SafeAreaView>
     )
@@ -44,5 +45,4 @@ const mapDispatchToProps = dispatch => {
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderList)
-
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(OrderList))

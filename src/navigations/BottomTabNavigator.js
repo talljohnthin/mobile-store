@@ -20,6 +20,7 @@ import Explore from './../screens/Explore'
 import OrderSuccess from './../components/orders/OrderSuccess'
 import ProductDetail from './../components/products/ProductDetail'
 import OrderList from './../components/orders/OrderList'
+import ViewOrders from './../components/orders/ViewOrders'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 
@@ -72,7 +73,8 @@ const ProfileStack = createStackNavigator({
   Basket:Basket,
   ProfileUpdate: ProfileUpdate,
   OrderSuccess : OrderSuccess,
-  OrderList: OrderList
+  OrderList: OrderList,
+  ViewOrders: ViewOrders
 }, {
   defaultNavigationOptions: {
     headerStyle: {

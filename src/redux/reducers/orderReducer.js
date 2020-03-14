@@ -3,7 +3,8 @@ import {
     ORDER_LOADING,
     ORDER_ERROR,
     ORDER_RESET,
-    GET_ORDERS
+    GET_ORDERS,
+    SELECT_ORDER
 } from './../actions/order/orderTypes'
 
 
@@ -11,7 +12,8 @@ const initialState = {
     orders:[],
     isSuccess:false,
     ordersLoading:false,
-    message:''
+    message:'',
+    selectedOrderId:''
 }
 
 const reducer = ( state = initialState, action) => {
@@ -21,6 +23,11 @@ const reducer = ( state = initialState, action) => {
                 ...state,
                 ordersLoading: false,
                 orders:action.payload
+            }
+        case SELECT_ORDER: 
+            return {
+                ...state,
+                selectedOrderId : action.payload
             }
         case ORDER_SUCCESS :
             return {

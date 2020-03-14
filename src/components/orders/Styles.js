@@ -49,21 +49,23 @@ export default Styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'flex-start',
         paddingLeft:20,
-        paddingTop:16,
-        paddingBottom:16,
+        paddingTop:22,
+        paddingBottom:22,
         borderBottomWidth:1,
         borderColor:'#efefef',
     },
     orderDescWrapper: {
         alignItems:'center',
         justifyContent:'center',
-        width: 190
+        width: 190,
+        flexDirection:'row'
     },
-    orderName: {
+    orderDate: {
         fontFamily: primaryFont,
-        fontSize:16,
+        fontSize:18,
         paddingTop:0,
-        width:'85%'
+        width:'85%',
+        paddingLeft:10
     },
     orderArrowIconWrapper: {
         width:100,
@@ -71,5 +73,18 @@ export default Styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'flex-end',
         paddingRight:20
+    },
+    orderItem: {
+        width:28,
+        height:28,
+        justifyContent:'center',
+        alignItems:'center',
+        fontSize:16,
+        display:'flex',
+        backgroundColor:fifthColor,
+        color:'#fff',
+        textAlign:'center',
+        borderRadius:28,
+        paddingTop:3
     }
 });

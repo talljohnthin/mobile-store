@@ -5,7 +5,8 @@ import {
     ORDER_ERROR,
     ORDER_SUCCESS,
     ORDER_RESET,
-    GET_ORDERS
+    GET_ORDERS,
+    SELECT_ORDER
 } from './orderTypes'
 
 export const getOrders = (userId) => {
@@ -15,8 +16,7 @@ export const getOrders = (userId) => {
         })
         db.collection("orders")
         .where("uid", "==", userId)
-        .get()
-        .then(snapshot => {
+        .onSnapshot(snapshot => {
             const orders = []
             snapshot.forEach(doc => {
                 const obj = {
@@ -59,6 +59,12 @@ export const orderProducts = (orderObj) => {
 export const orderReset = () => {
     return {
         type: ORDER_RESET
+    }
+}
+export const selectOrder = (orderId) => {
+    return {
+        type: SELECT_ORDER,
+        payload: orderId
     }
 }
 

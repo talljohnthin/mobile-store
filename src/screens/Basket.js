@@ -37,15 +37,21 @@ const Basket = (props) => {
     const [ useProfile, setUseProfile] = useState(false)
     const [ showModal, setShowModal ] = useState(false)
     const [ loading, setLoading] = useState(false)
+    let isMounted = false
 
     useEffect(()=> {
-        if(isSuccess) {
-           navigation.navigate('OrderSuccess')
-           setLoading(false)
-           setShowModal(false)
-           emptyBasket()
+        isMounted = true
+        if(isMounted) {
+            if(isSuccess) {
+                navigation.navigate('OrderSuccess')
+                setLoading(false)
+                setShowModal(false)
+                emptyBasket()
+            }
         }
+        
         return () => {
+            isMounted = false
             orderReset()
         }
     }, [isSuccess])
@@ -67,6 +73,9 @@ const Basket = (props) => {
     }
 
     const handleOrderProducts = () => {
+        const dateToday = new Date()
+        const fullDate = `${ dateToday.getFullYear() }-${ dateToday.getMonth() }-${ dateToday.getDay()}`
+        
         const orderObj = {
             transaction_id : `${user.uid}${Date.parse(new Date())}${Math.random() * 100000}`.replace(".",""), 
             uid: user.uid,
@@ -79,7 +88,8 @@ const Basket = (props) => {
                 address
             },
             status:"On Review",
-            notes:"notes"
+            notes: notes,
+            order_date: fullDate
         }
         // check phone number
         if (mobileNumberValidtor(orderObj.shipping_details.phone) === false) {
@@ -103,6 +113,11 @@ const Basket = (props) => {
         }
         // check if has order
         if (orderObj.total_amount == 0 || orderObj.total_amount === undefined || orderObj.total_amount == null) {
+            showToast("System Error: Restart the app to continue!", "error")
+            return
+        }
+        // check if has date
+        if (orderObj.order_date == 0 || orderObj.order_date === undefined || orderObj.order_date == null) {
             showToast("System Error: Restart the app to continue!", "error")
             return
         }
