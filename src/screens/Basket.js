@@ -89,7 +89,8 @@ const Basket = (props) => {
             },
             status:"On Review",
             notes: notes,
-            order_date: fullDate
+            order_date: fullDate,
+            timestamp: Date.now()
         }
         // check phone number
         if (mobileNumberValidtor(orderObj.shipping_details.phone) === false) {

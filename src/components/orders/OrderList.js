@@ -13,9 +13,10 @@ import {
 import styles from './Styles'
 const OrderList = (props) => {
     const { orders } = props
+    const sortedOrders = [...orders].sort((a, b) => b.name.timestamp - a.name.timestamp)
     const listOrders= props.loading ? <Spinner style={styles.spinner} color={fifthColor} /> : (
         <FlatList
-            data={orders}
+            data={sortedOrders}
             renderItem={({ item, index }) => <Order item={item} index={ index + 1} />}
             keyExtractor={item => item.id.toString()}
         />
