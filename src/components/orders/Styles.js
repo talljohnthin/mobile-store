@@ -86,5 +86,62 @@ export default Styles = StyleSheet.create({
         textAlign:'center',
         borderRadius:28,
         paddingTop:3
-    }
+    },
+    // order total
+    orderSumWrapper: {
+        
+    },
+    orderShipping: {
+        padding:20,
+        borderWidth:1,
+        borderColor:'#f4f4f4',
+    },
+    orderShippingText: {
+        fontFamily: tertiaryFont,
+        lineHeight:26,
+        paddingTop:5
+    },
+    orderSum: {
+        padding: 20,
+        paddingBottom: 0,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
+    },
+    orderSumLabel: {
+        fontFamily: tertiaryFont,
+    },
+    orderSumValue: {
+        fontSize:22,
+        fontFamily: tertiaryFont
+    },
+    buttonWrapper: {
+        paddingLeft:20,
+        paddingRight:20
+    },
+    btnOrder: {
+        borderRadius:50,
+        height:60,
+        backgroundColor:fifthColor,
+        alignItems:'center',
+        justifyContent:'center',
+        flexDirection:'row',
+        marginTop:25
+    },
+    btnCancel: {
+        borderRadius:50,
+        height:60,
+        backgroundColor:"#000",
+        alignItems:'center',
+        justifyContent:'center',
+        flexDirection:'row',
+        marginTop:10
+    },
+    btnOrderText: {
+        textTransform:'capitalize',
+        letterSpacing:0,
+        color:'#fff',
+        fontSize:17,
+        fontFamily: primaryFont,
+    },
 });

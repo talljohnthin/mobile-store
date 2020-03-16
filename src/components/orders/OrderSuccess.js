@@ -18,4 +18,7 @@ const OrderSuccess = ({ navigation }) => {
         </View>
     )
 }
+OrderSuccess.navigationOptions = {
+    title: 'Order Success'
+}
 export default withNavigation(OrderSuccess)

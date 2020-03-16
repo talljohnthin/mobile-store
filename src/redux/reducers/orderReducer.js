@@ -4,7 +4,8 @@ import {
     ORDER_ERROR,
     ORDER_RESET,
     GET_ORDERS,
-    SELECT_ORDER
+    SELECT_ORDER,
+    DELETE_ORDER
 } from './../actions/order/orderTypes'
 
 
@@ -28,6 +29,10 @@ const reducer = ( state = initialState, action) => {
             return {
                 ...state,
                 selectedOrderId : action.payload
+            }
+        case DELETE_ORDER: 
+            return {
+                ...state
             }
         case ORDER_SUCCESS :
             return {

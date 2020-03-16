@@ -6,7 +6,8 @@ import {
     ORDER_SUCCESS,
     ORDER_RESET,
     GET_ORDERS,
-    SELECT_ORDER
+    SELECT_ORDER,
+    DELETE_ORDER
 } from './orderTypes'
 
 export const getOrders = (userId) => {
@@ -65,6 +66,16 @@ export const selectOrder = (orderId) => {
     return {
         type: SELECT_ORDER,
         payload: orderId
+    }
+}
+export const deleteOrder = (orderId) => {
+    db.collection("orders").doc(orderId).delete().then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
+    return {
+        type: DELETE_ORDER
     }
 }
 
