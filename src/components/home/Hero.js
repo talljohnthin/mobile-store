@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import { fetchUser } from './../../redux/actions/user/userActions'
 import Carousel from 'react-native-snap-carousel';
-import { Button } from 'native-base'
 import { View, Dimensions, ImageBackground, TouchableOpacity } from 'react-native'
 
-import Text from '../../utils/Text'
 import styles from './Styles'
 import { ScrollView } from 'react-native-gesture-handler';
 

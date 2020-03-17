@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, SafeAreaView, TouchableOpacity } from 'react-native'
-import { Item, Input, List, ListItem } from 'native-base'
-import Icon from 'react-native-vector-icons/AntDesign'
+import { List, ListItem } from 'native-base'
 import Text from '../../utils/Text'
 import styles from './Styles'
 const Filter = () => {

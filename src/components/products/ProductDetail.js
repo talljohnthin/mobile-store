@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux'
-import { showToast } from './../../helpers'
+import { showToast, formatMoney } from './../../helpers'
 import { getProduct } from './../../redux/actions/product/productActions'
 import { addToBasket, sumProductsInBasket } from './../../redux/actions/basket/basketActions'
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -58,9 +58,6 @@ const ProductDetail = (props) => {
     useEffect(()=> {
         formatProductImages()
         setVariationOption(priceOptions[0].options)
-        return () => {
-            console.log('on leave')
-        }
     }, [props.product])
 
     const formatProductImages = () => {
@@ -183,7 +180,7 @@ const ProductDetail = (props) => {
             { renderCarousel }
             <View style={styles.productDetailWrapper}>
                 <Text style={styles.productDetailName}>{ productName }</Text>
-                <Text style={styles.productDetailPrice}>&#8369;{ price ? price : priceOptions[0].options[0].price }</Text>
+                <Text style={styles.productDetailPrice}>&#8369; { price ? formatMoney(price) : formatMoney(priceOptions[0].options[0].price) }</Text>
             </View>
             <ScrollView
                 style={styles.variationWrapper}

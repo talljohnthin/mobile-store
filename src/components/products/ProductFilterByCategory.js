@@ -44,17 +44,7 @@ const ProductFilterByCategory = (props) => {
     )
 }
 ProductFilterByCategory.navigationOptions = ({navigation}) => ({
-    title: `Category: ${ navigation.state.params.filterCategory }`,
-    headerRight: () => (
-        <View style={styles.searchAndFilter}>
-            <TouchableOpacity activeOpacity={0.9} onPress={ () => navigation.navigate('Search')}>
-                <Icon style={styles.searchIcon} name={'search1'} size={25} />
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.9} onPress={ () => navigation.navigate('Filter')}>
-                <Icon style={styles.filterIcon} name={'filter'} size={25} />
-            </TouchableOpacity>
-        </View>
-    )
+    title: `Category: ${ navigation.state.params.filterCategory }`
 })
 
 const mapStateToProps = state => {

@@ -13,7 +13,34 @@ export const getAllProducts = (countLimit) => {
             type: PRODUCT_REQUEST_LOADING
         })
         db.collection("products")
-        .limit(countLimit || 40)
+        .limit(countLimit || 10)
+        .get()
+        .then(snapshot => {
+            const products = []
+            snapshot.forEach(doc => {
+                const obj = {
+                    id: doc.id,
+                    name: doc.data()
+                }
+                products.push(obj)
+            })
+            dispatch({
+                type: GET_ALL_PRODUCTS,
+                payload: products
+            })
+        }, function (error) {
+            dispatch({
+                type: PRODUCT_REQUEST_ERROR,
+                payload: error
+            })
+        });
+    }
+}
+
+export const getRestProducts = (countLimit) => {
+    return (dispatch) => {
+        db.collection("products")
+        .limit(countLimit)
         .get()
         .then(snapshot => {
             const products = []
@@ -61,7 +88,6 @@ export const requestProductSegmentCategory = (segment, category) => {
                     }
                     products.push(obj)
                 })
-                console.log(products)
                 dispatch({
                     type: PRODUCT_REQUEST_SEGMENT_CATEGORY,
                     payload: products

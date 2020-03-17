@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { View, Image } from 'react-native'
+import { formatMoney } from '../../helpers'
 import Text from '../../utils/Text'
 import { withNavigation } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Feather'
@@ -18,7 +19,7 @@ const Product = (props) => {
     const productId = props.id
     const price = priceOptions[0].options[0].price
     const renderImageSource = cover ? {uri : cover} : require('./../../../assets/images/img-not-loaded.jpg')
-    
+
     const handleGetDetails = () => {
         if (productId) {
             props.getProduct(productId)
@@ -45,7 +46,7 @@ const Product = (props) => {
             <TouchableOpacity activeOpacity={0.8} onPress={() => handleGetDetails() }>
                 <View style={styles.productDescWrapper}>
                     <Text style={styles.productName}>{productName}</Text>
-                    <Text style={styles.productPrice}>&#8369;{price}</Text>
+                    <Text style={styles.productPrice}>&#8369; {formatMoney(price)}</Text>
                 </View>
             </TouchableOpacity>
             

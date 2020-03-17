@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { StyleSheet, SafeAreaView, FlatList, View, Text } from 'react-native'
 import { Content, Icon, Picker, Form } from 'native-base'
 
-import styles from './../products/Styles'
 const Filter = () => {
     const [selected, setSelected] = useState('new')
     const onValueChange = (value) => {

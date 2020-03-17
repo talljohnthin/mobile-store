@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux'
-import { getAllProducts, showCartModal } from './../../redux/actions/product/productActions'
+import { getAllProducts, getRestProducts, showCartModal } from './../../redux/actions/product/productActions'
 import { View , SafeAreaView, FlatList,StyleSheet} from 'react-native'
 import Product from './Product'
 import styles from './Styles'
@@ -30,7 +30,11 @@ const Products = (props) => {
         Object.keys(props.product).length > 0 && setHasProduct(true)
     }, [props.product])
 
-
+    const handleOnScrolledEnd = () => {
+        if(products.length) {
+            props.getRestProducts(products.length + 30)
+        }
+    }
     const productList = props.loading ? <Spinner style={styles.spinner} color={fifthColor} /> : (
         <FlatList
             numColumns={2} 
@@ -38,6 +42,8 @@ const Products = (props) => {
             data={products}
             renderItem={({ item }) => <Product item={item.name} id={item.id} />}
             keyExtractor={item => item.id.toString()}
+            onEndReached={()=> handleOnScrolledEnd() }
+            onEndReachedThreshold={0.5}
         />
     )
 
@@ -66,5 +72,5 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = { getAllProducts, showCartModal }
+const mapDispatchToProps = { getAllProducts, getRestProducts, showCartModal }
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(Products))

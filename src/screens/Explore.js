@@ -6,9 +6,10 @@ const Explore = () => {
     return (<Products />)
 }
 Explore.navigationOptions = ({ navigation }) => ({
+    headerTitleAlign: 'left',
     headerRight: () => (
         <View style={styles.searchAndFilter}>
-            <TouchableOpacity activeOpacity={0.9} onPress={ () => navigation.navigate('Filter')}>
+            <TouchableOpacity activeOpacity={0.9} onPress={ () => navigation.navigate('Categories')}>
                 <Icon style={styles.filterIcon} name={'filter'} size={25} />
             </TouchableOpacity>
         </View>
