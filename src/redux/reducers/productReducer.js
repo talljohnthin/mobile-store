@@ -7,7 +7,8 @@ import {
     PRODUCT_REQUEST_SEGMENT_CATEGORY,
     SHOW_CART_MODAL,
     PRODUCT_REQUEST_LOADING,
-    PRODUCT_REQUEST_ERROR
+    PRODUCT_REQUEST_ERROR,
+    GET_FILTERED_PRODUCT
 } from './../actions/product/productTypes'
 
 const initialState = {
@@ -35,6 +36,13 @@ const reducer = ( state = initialState, action) => {
                 ...state,
                 productLoading: false,
                 product: foundProduct
+            }
+        case GET_FILTERED_PRODUCT :
+            const foundFilteredProduct = findFilteredProduct(state, action.payload)
+            return {
+                ...state,
+                productLoading: false,
+                product: foundFilteredProduct
             }
         case PRODUCT_REQUEST_HINT :
             return {
@@ -88,7 +96,14 @@ const reducer = ( state = initialState, action) => {
 
 const findProduct = (state, id) => {
     const newState = [...state.products]
-    return newState.find( product => product.id == id )
+    const result = newState.find( product => product.id == id )
+    return result === undefined ? {} : result
+}
+
+const findFilteredProduct = (state, id) => {
+    const newState = [...state.selectedCategories]
+    const result = newState.find( product => product.id == id )
+    return result === undefined ? {} : result
 }
 
 export default reducer

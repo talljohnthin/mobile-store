@@ -17,7 +17,7 @@ const Category = (props) => {
     }
     const handleGetProducts = () => {
         props.requestProductSegmentCategory(segment, category_name)
-        props.navigation.navigate('ProductFilterByCategory', { filterCategory: category_name })
+        props.navigation.navigate('ProductFilterByCategory', { filterCategory: category_name, segment: segment })
     }
     return (
         <TouchableOpacity activeOpacity={.6} onPress={handleGetProducts}>

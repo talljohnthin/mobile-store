@@ -49,8 +49,6 @@ const Categories = (props) => {
             { renderTab() }
         </Tabs>
     }
-
-
     return (
         <Container>
             {

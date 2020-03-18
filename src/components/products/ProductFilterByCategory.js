@@ -1,33 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux'
-import { View , SafeAreaView, FlatList} from 'react-native'
+import { SafeAreaView, FlatList} from 'react-native'
 import Text from './../../utils/Text'
-import Product from './Product'
+import ProductFilter from './ProductFilter'
+import { requestRestProductSegmentCategory } from './../../redux/actions/product/productActions'
 import styles from './Styles'
 import { Spinner } from 'native-base'
-import Icon from 'react-native-vector-icons/AntDesign'
 import { withNavigation } from 'react-navigation'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import {
     fifthColor
 } from '../../styles/Variables'
 
 const ProductFilterByCategory = (props) => {
+    const { requestRestProductSegmentCategory, navigation } = props
     const [products, setProducts] = useState([])
 
     useEffect(() => {
         setProducts(props.products)
     }, [props.products])
 
+    const handleOnScrolledEnd = () => {
+       const filterCategory = navigation.state.params.filterCategory
+       const segment = navigation.state.params.segment
+       if(products.length) {
+        requestRestProductSegmentCategory(segment, filterCategory, products.length + 30)
+       }
+    }
     const handleCheckProducts = () => {
          if ( products.length > 0 ) {
              return  <FlatList
                 numColumns={2} 
                 columnWrapperStyle={{flex: 1,justifyContent: "space-around"}}
                 data={products}
-                renderItem={({ item }) => <Product item={item.name} id={item.id}  />}
+                renderItem={({ item }) => <ProductFilter item={item.name} id={item.id}  />}
                 keyExtractor={item => item.id.toString()}
+                onEndReached={()=> handleOnScrolledEnd() }
+                onEndReachedThreshold={0.5}
             />
          } else {
             return <Text>No product on this category at this time.</Text>
@@ -54,5 +63,8 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(withNavigation(ProductFilterByCategory))
+const mapDispatchToProps = { requestRestProductSegmentCategory }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(ProductFilterByCategory))
 

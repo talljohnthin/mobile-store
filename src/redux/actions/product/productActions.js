@@ -4,7 +4,8 @@ import {
     GET_PRODUCT,
     PRODUCT_REQUEST_LOADING,
     PRODUCT_REQUEST_SEGMENT_CATEGORY,
-    PRODUCT_REQUEST_ERROR
+    PRODUCT_REQUEST_ERROR,
+    GET_FILTERED_PRODUCT
 } from './productTypes'
 
 export const getAllProducts = (countLimit) => {
@@ -16,6 +17,7 @@ export const getAllProducts = (countLimit) => {
         .limit(countLimit || 10)
         .get()
         .then(snapshot => {
+            console.log(snapshot.size)
             const products = []
             snapshot.forEach(doc => {
                 const obj = {
@@ -70,7 +72,13 @@ export const getProduct = (productId) => {
     }
 }
 
-export const requestProductSegmentCategory = (segment, category) => {
+export const getFilteredProduct = (productId) => {
+    return (dispatch) => {
+        dispatch({ type: GET_FILTERED_PRODUCT, payload: productId })
+    }
+}
+
+export const requestProductSegmentCategory = (segment, category, countLimit) => {
     return (dispatch) => {
         dispatch({
             type: PRODUCT_REQUEST_LOADING
@@ -78,6 +86,35 @@ export const requestProductSegmentCategory = (segment, category) => {
         db.collection("products")
             .where("segment", "==", segment)
             .where("category", "==", category)
+            .limit(countLimit || 10)
+            .get()
+            .then(function(querySnapshot) {
+                const products = []
+                querySnapshot.forEach(function(doc) {
+                    const obj = {
+                        id: doc.id,
+                        name: doc.data()
+                    }
+                    products.push(obj)
+                })
+                dispatch({
+                    type: PRODUCT_REQUEST_SEGMENT_CATEGORY,
+                    payload: products
+                })
+            })
+            .catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
+            
+    }
+}
+
+export const requestRestProductSegmentCategory = (segment, category, countLimit) => {
+    return (dispatch) => {
+        db.collection("products")
+            .where("segment", "==", segment)
+            .where("category", "==", category)
+            .limit(countLimit || 10)
             .get()
             .then(function(querySnapshot) {
                 const products = []
