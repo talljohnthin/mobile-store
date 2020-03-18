@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { fifthColor } from '../styles/Variables';
+import { fifthColor, primaryColor } from '../styles/Variables';
 
 export default Styles = StyleSheet.create({
     userBadge: { 
@@ -12,7 +12,7 @@ export default Styles = StyleSheet.create({
         backgroundColor:fifthColor
     },
     userBadgeCount: {
-        color:'#fff',
+        color:primaryColor,
         fontSize:12,
         paddingLeft:1,
         paddingRight:1

@@ -23,7 +23,7 @@ export default Styles = StyleSheet.create({
         flexWrap:'wrap',
         justifyContent:'space-between',
         padding:6,
-        paddingTop:15,
+        paddingTop:10,
         paddingBottom:0,
         width:'100%',
         flex:1
@@ -53,7 +53,7 @@ export default Styles = StyleSheet.create({
         color:fifthColor
     },
     productImageWrapper: {
-        backgroundColor:'#f5f5f5',
+        backgroundColor:'#f8f9f9',
         borderRadius:6,
         overflow:'hidden'
     },
@@ -70,7 +70,7 @@ export default Styles = StyleSheet.create({
         paddingTop:0,
         marginTop:0,
         fontSize:15,
-        color:fifthColor
+        color:'#b6b6b6'
     },
     productName: {
         fontSize:15,

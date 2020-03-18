@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { SafeAreaView, FlatList} from 'react-native'
 import Text from './../../utils/Text'
 import ProductFilter from './ProductFilter'
-import { requestRestProductSegmentCategory } from './../../redux/actions/product/productActions'
+import { requestRestProductSegmentCategory, getFilteredProductSize } from './../../redux/actions/product/productActions'
 import styles from './Styles'
 import { Spinner } from 'native-base'
 import { withNavigation } from 'react-navigation'
@@ -13,7 +13,7 @@ import {
 } from '../../styles/Variables'
 
 const ProductFilterByCategory = (props) => {
-    const { requestRestProductSegmentCategory, navigation } = props
+    const { requestRestProductSegmentCategory, navigation, selectedCategoriesTotal, getFilteredProductSize } = props
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -21,11 +21,16 @@ const ProductFilterByCategory = (props) => {
     }, [props.products])
 
     const handleOnScrolledEnd = () => {
-       const filterCategory = navigation.state.params.filterCategory
-       const segment = navigation.state.params.segment
-       if(products.length) {
-        requestRestProductSegmentCategory(segment, filterCategory, products.length + 30)
-       }
+        const filterCategory = navigation.state.params.filterCategory
+        const segment = navigation.state.params.segment
+
+        if(selectedCategoriesTotal === 0) {
+            getFilteredProductSize(segment, filterCategory)
+        }
+        if(products.length && products.length < selectedCategoriesTotal) {
+          requestRestProductSegmentCategory(segment, filterCategory, products.length + 50)
+        }
+       
     }
     const handleCheckProducts = () => {
          if ( products.length > 0 ) {
@@ -58,12 +63,13 @@ ProductFilterByCategory.navigationOptions = ({navigation}) => ({
 
 const mapStateToProps = state => {
     return {
+        selectedCategoriesTotal: state.products.selectedCategoriesTotal,
         products:state.products.selectedCategories,
         loading: state.products.productLoading
     }
 }
 
-const mapDispatchToProps = { requestRestProductSegmentCategory }
+const mapDispatchToProps = { requestRestProductSegmentCategory, getFilteredProductSize }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(ProductFilterByCategory))

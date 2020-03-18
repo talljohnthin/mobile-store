@@ -1,6 +1,7 @@
 import { 
     GET_ALL_PRODUCTS,
     GET_PRODUCT,
+    GET_PRODUCT_SIZE,
     PRODUCT_REQUEST_HINT,
     PRODUCT_REQUEST_SEARCH,
     PRODUCT_CLEAR_HINT,
@@ -8,17 +9,20 @@ import {
     SHOW_CART_MODAL,
     PRODUCT_REQUEST_LOADING,
     PRODUCT_REQUEST_ERROR,
-    GET_FILTERED_PRODUCT
+    GET_FILTERED_PRODUCT,
+    GET_FILTERED_PRODUCT_SIZE
 } from './../actions/product/productTypes'
 
 const initialState = {
     productLoading:false,
     productErrorMessage:'',
     products: [],
+    productsTotal:0,
     product: {},
     searchHint: [],
     searchAndFilters: [],
     selectedCategories: [],
+    selectedCategoriesTotal:0,
     showCartModal: false
 }
 
@@ -36,6 +40,18 @@ const reducer = ( state = initialState, action) => {
                 ...state,
                 productLoading: false,
                 product: foundProduct
+            }
+        case GET_PRODUCT_SIZE :
+            return {
+                ...state,
+                productLoading: false,
+                productsTotal: action.payload
+            }
+        case GET_FILTERED_PRODUCT_SIZE :
+            return {
+                ...state,
+                productLoading: false,
+                selectedCategoriesTotal: action.payload
             }
         case GET_FILTERED_PRODUCT :
             const foundFilteredProduct = findFilteredProduct(state, action.payload)

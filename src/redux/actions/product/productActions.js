@@ -5,7 +5,9 @@ import {
     PRODUCT_REQUEST_LOADING,
     PRODUCT_REQUEST_SEGMENT_CATEGORY,
     PRODUCT_REQUEST_ERROR,
-    GET_FILTERED_PRODUCT
+    GET_FILTERED_PRODUCT,
+    GET_FILTERED_PRODUCT_SIZE,
+    GET_PRODUCT_SIZE
 } from './productTypes'
 
 export const getAllProducts = (countLimit) => {
@@ -36,6 +38,15 @@ export const getAllProducts = (countLimit) => {
                 payload: error
             })
         });
+        // GET_PRODUCT_SIZE
+        db.collection("products")
+        .get()
+        .then(snapshot => {
+            dispatch({
+                type: GET_PRODUCT_SIZE,
+                payload: snapshot.size
+            })
+        })
     }
 }
 
@@ -114,7 +125,7 @@ export const requestRestProductSegmentCategory = (segment, category, countLimit)
         db.collection("products")
             .where("segment", "==", segment)
             .where("category", "==", category)
-            .limit(countLimit || 10)
+            .limit(countLimit)
             .get()
             .then(function(querySnapshot) {
                 const products = []
@@ -136,3 +147,19 @@ export const requestRestProductSegmentCategory = (segment, category, countLimit)
             
     }
 }
+
+export const getFilteredProductSize = (segment, category) => {
+    return (dispatch) => {
+        db.collection("products")
+        .where("segment", "==", segment)
+        .where("category", "==", category)
+        .get()
+        .then(snapshot => {
+            dispatch({
+                type: GET_FILTERED_PRODUCT_SIZE,
+                payload: snapshot.size
+            })
+        })    
+    }
+}
+

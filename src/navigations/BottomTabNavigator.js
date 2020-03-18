@@ -1,7 +1,10 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import { Badge } from 'native-base'
-import Icon from 'react-native-vector-icons/AntDesign'
+import Feather from 'react-native-vector-icons/Feather'
+import Octicons from 'react-native-vector-icons/Octicons'
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import Login from './../components/auth/Login'
 import SignUp from './../components/auth/SignUp'
 import ResetPassword from './../components/auth/ResetPassword'
@@ -22,7 +25,7 @@ import ProductDetail from './../components/products/ProductDetail'
 import OrderList from './../components/orders/OrderList'
 import ViewOrders from './../components/orders/ViewOrders'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator, HeaderTitle } from 'react-navigation-stack';
 
 import styles from './Styles'
 
@@ -43,7 +46,10 @@ const HomeStack = createStackNavigator({
 }, {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#fff',
+      backgroundColor: fifthColor,
+    },
+    headerTitleStyle: {
+      fontSize:17
     },
     headerTintColor: primaryColor,
     headerTitleAlign:'center'
@@ -57,10 +63,13 @@ const ExploreStack = createStackNavigator({
 }, {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#fff',
+      backgroundColor: fifthColor,
+    },
+    headerTitleStyle: {
+      fontSize:17
     },
     headerTintColor: primaryColor,
-    headerTitleAlign:'center'
+    headerTitleAlign:'left',
   }
 })
 
@@ -78,7 +87,10 @@ const ProfileStack = createStackNavigator({
 }, {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#fff',
+      backgroundColor:fifthColor,
+    },
+    headerTitleStyle: {
+      fontSize:17
     },
     headerTintColor: primaryColor,
     headerTitleAlign:'center'
@@ -92,10 +104,11 @@ const CategoriesStack = createStackNavigator({
 }, {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#fff',
+      backgroundColor: fifthColor,
     },
     headerTintColor: primaryColor,
     headerTitleStyle: {
+      fontSize:17,
       textAlign:'center',
       fontFamily:tertiaryFont,
     },
@@ -113,7 +126,7 @@ export const RootStack = createMaterialBottomTabNavigator({
       },
       tabBarIcon: ({ tintColor }) => (
         <View>
-          <Icon name={'home'} style={[{ color: tintColor }]} size={25} />
+          <Octicons name={'home'} style={[{ color: tintColor }]} size={25} />
         </View>
       )
     }
@@ -126,7 +139,7 @@ export const RootStack = createMaterialBottomTabNavigator({
       },
       tabBarIcon: ({ tintColor }) => (
         <View>
-          <Icon name={'appstore-o'} style={[{ color: tintColor }]} size={22} />
+          <SimpleLineIcons name={'layers'} style={[{ color: tintColor }]} size={22} />
         </View>
       )
     }
@@ -139,7 +152,7 @@ export const RootStack = createMaterialBottomTabNavigator({
       },
       tabBarIcon: ({ tintColor }) => (
         <View>
-          <Icon name={'bars'} style={[{ color: tintColor }]} size={25} />
+          <Ionicons name={'ios-options'} style={[{ color: tintColor }]} size={25} />
         </View>
       )
     }
@@ -152,7 +165,7 @@ export const RootStack = createMaterialBottomTabNavigator({
       },
       tabBarIcon: ({ tintColor }) => (
         <View>
-          <Icon name={'user'} style={[{ color: tintColor }]} size={25} />
+          <Feather name={'user'} style={[{ color: tintColor}]} size={25} />
           <Badge warning style={styles.userBadge}>
             <Text style={styles.userBadgeCount}>1</Text>
           </Badge>

@@ -66,7 +66,7 @@ const Profile = (props) => {
                 <Button 
                     style={[styles.buttonEditUser, !props.isLogin && {display: 'none'}]}
                     onPress={ () => props.navigation.navigate('ProfileUpdate') } >
-                    <Text style={styles.buttonTextColor}>UPDATE USER</Text>
+                    <Text style={styles.buttonUpdateTextColor}>UPDATE USER</Text>
                 </Button>
             </View>
             { props.isLogin ? null : <TouchableOpacity style={styles.signUpWrapper} activeOpacity={0.9} onPress={ () => props.navigation.navigate('SignUp')}><Text style={AuthStyles.signUp} >Don't have an account? <Text  style={AuthStyles.signUpText}>Sign Up</Text></Text></TouchableOpacity> }

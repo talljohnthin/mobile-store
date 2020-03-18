@@ -24,6 +24,7 @@ const Products = (props) => {
             props.getAllProducts()
         }  
         setProducts(props.products)
+        
     }, [props.products])
 
     useEffect(() => {
@@ -31,8 +32,8 @@ const Products = (props) => {
     }, [props.product])
 
     const handleOnScrolledEnd = () => {
-        if(products.length) {
-            props.getRestProducts(products.length + 30)
+        if(products.length && products.length < props.productsTotal && props.productsTotal !== 0) {
+            props.getRestProducts(products.length + 50)
         }
     }
     const productList = props.loading ? <Spinner style={styles.spinner} color={fifthColor} /> : (
@@ -67,6 +68,7 @@ const mapStateToProps = state => {
     return {
         products:state.products.products,
         product:state.products.product,
+        productsTotal:state.products.productsTotal,
         showCartModalState: state.products.showCartModal,
         loading: state.products.productLoading
     }

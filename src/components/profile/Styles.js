@@ -1,12 +1,8 @@
 import { StyleSheet } from 'react-native'
 import {
     primaryColor,
-    secondaryColor,
-    tertiaryColor,
-    fourthColor,
     fifthColor,
     primaryFont,
-    secondaryFont,
     tertiaryFont
 } from '../../styles/Variables'
 
@@ -40,7 +36,7 @@ export default Styles = StyleSheet.create({
     userNotImage: {
         fontSize:30,
         fontFamily:tertiaryFont,
-        color:'#fff'
+        color:primaryColor
     },
     userDescWrapper: {
         paddingLeft:15
@@ -109,7 +105,7 @@ export default Styles = StyleSheet.create({
         backgroundColor:fifthColor
     },
     ordersBadgeText: {
-        color:'#fff',
+        color:primaryColor,
         fontSize:13
     },
     //user options
@@ -152,7 +148,7 @@ export default Styles = StyleSheet.create({
         justifyContent: 'center',
         fontFamily : primaryFont,
         height:60,
-        borderRadius:50,
+        borderRadius:4,
         backgroundColor:primaryColor,
     },
     buttonEditUser: {
@@ -161,7 +157,7 @@ export default Styles = StyleSheet.create({
         justifyContent: 'center',
         fontFamily : primaryFont,
         height:60,
-        borderRadius:50,
+        borderRadius:4,
         marginTop:10,
         backgroundColor:fifthColor,
     },
@@ -198,5 +194,9 @@ export default Styles = StyleSheet.create({
         paddingLeft:0,
         paddingTop:8,
         width:'100%'
+    },
+    //update
+    buttonUpdateTextColor: {
+        color:"#000"
     }
 });
