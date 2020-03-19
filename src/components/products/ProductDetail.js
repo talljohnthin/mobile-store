@@ -196,6 +196,11 @@ const ProductDetail = (props) => {
             >
                 {renderVariationOption()}
             </ScrollView>
+            <View style={styles.btnWishListWrapper}>
+                <Button style={styles.btnWishList} large rounded onPress={()=> addToBasket()}>
+                    <Text style={styles.btnWishListText}>Add To Basket</Text>
+                </Button>
+            </View>
             <View>
                 <Tabs
                     tabContainerStyle={styles.tabContainerStyle}
@@ -228,11 +233,7 @@ const ProductDetail = (props) => {
                 </Tabs>
 
             </View>
-            <View style={styles.btnWishListWrapper}>
-                <Button style={styles.btnWishList} large rounded onPress={()=> addToBasket()}>
-                    <Text style={styles.btnWishListText}>ADD TO BASKET</Text>
-                </Button>
-            </View>
+           
         </ScrollView>
     )
 }
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     productDetailName: {
-        fontSize: 24,
+        fontSize: 20,
         fontFamily: tertiaryFont,
     },
     productDetailPrice: {
@@ -295,13 +296,13 @@ const styles = StyleSheet.create({
         paddingBottom: 3,
         marginRight: 6,
         color: '#333',
-        borderRadius: 30,
+        borderRadius: 4,
         minWidth: 40,
         textAlign: 'center',
         fontSize: 17
     },
     selectedVariationText: {
-        backgroundColor: fifthColor,
+        backgroundColor: primaryColor,
         color: "#fff"
     },
     variationOptionWrapper: {
@@ -317,7 +318,7 @@ const styles = StyleSheet.create({
         paddingBottom: 3,
         marginRight: 6,
         color: '#333',
-        borderRadius: 30,
+        borderRadius: 4,
         minWidth: 40,
         textAlign: 'center',
         fontSize: 17
@@ -369,10 +370,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         backgroundColor: fifthColor,
         justifyContent: 'center',
-        height: 50
+        height: 50,
+        borderRadius:4
     },
     btnWishListText: {
-        color: '#fff',
+        color: primaryColor,
         paddingLeft: 30,
         paddingRight: 30
     }

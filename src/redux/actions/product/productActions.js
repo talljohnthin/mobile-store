@@ -7,7 +7,8 @@ import {
     PRODUCT_REQUEST_ERROR,
     GET_FILTERED_PRODUCT,
     GET_FILTERED_PRODUCT_SIZE,
-    GET_PRODUCT_SIZE
+    GET_PRODUCT_SIZE,
+    RESET_GET_FILTERED_PRODUCT_SIZE
 } from './productTypes'
 
 export const getAllProducts = (countLimit) => {
@@ -160,6 +161,12 @@ export const getFilteredProductSize = (segment, category) => {
                 payload: snapshot.size
             })
         })    
+    }
+}
+
+export const resetGetFilteredProductSize = () => {
+    return {
+        type: RESET_GET_FILTERED_PRODUCT_SIZE
     }
 }
 

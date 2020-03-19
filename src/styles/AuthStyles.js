@@ -79,7 +79,7 @@ export default AuthStyles = StyleSheet.create({
         justifyContent: 'center',
         fontFamily : primaryFont,
         height:60,
-        borderRadius:50,
+        borderRadius:4,
         backgroundColor:primaryColor,
         marginTop: 30
     },

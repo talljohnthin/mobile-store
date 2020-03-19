@@ -15,6 +15,8 @@ export default Styles = StyleSheet.create({
         color:primaryColor,
         fontSize:12,
         paddingLeft:1,
-        paddingRight:1
+        paddingRight:1,
+        top:-2,
+        position:"relative"
     }
 });

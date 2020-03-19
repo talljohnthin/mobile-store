@@ -25,7 +25,7 @@ export default Styles = StyleSheet.create({
         justifyContent: 'center',
         fontFamily : primaryFont,
         height:60,
-        borderRadius:50,
+        borderRadius:4,
         marginTop:10,
         paddingLeft:30,
         paddingRight:30,
@@ -82,10 +82,10 @@ export default Styles = StyleSheet.create({
         fontSize:16,
         display:'flex',
         backgroundColor:fifthColor,
-        color:'#fff',
+        color:primaryColor,
         textAlign:'center',
         borderRadius:28,
-        paddingTop:3
+        paddingTop:2
     },
     // order total
     orderSumWrapper: {
@@ -120,7 +120,7 @@ export default Styles = StyleSheet.create({
         paddingRight:20
     },
     btnOrder: {
-        borderRadius:50,
+        borderRadius:4,
         height:60,
         backgroundColor:fifthColor,
         alignItems:'center',
@@ -129,7 +129,7 @@ export default Styles = StyleSheet.create({
         marginTop:25
     },
     btnCancel: {
-        borderRadius:50,
+        borderRadius:4,
         height:60,
         backgroundColor:"#000",
         alignItems:'center',

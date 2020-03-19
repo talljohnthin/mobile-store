@@ -141,7 +141,7 @@ export default Styles = StyleSheet.create({
         paddingRight:20
     },
     btnOrder: {
-        borderRadius:50,
+        borderRadius:4,
         height:60,
         backgroundColor:fifthColor,
         alignItems:'center',
@@ -152,7 +152,7 @@ export default Styles = StyleSheet.create({
     btnOrderText: {
         textTransform:'capitalize',
         letterSpacing:0,
-        color:'#fff',
+        color:'#000',
         fontSize:17,
         fontFamily: primaryFont,
     },
@@ -177,13 +177,16 @@ export default Styles = StyleSheet.create({
         justifyContent: 'center',
         fontFamily : primaryFont,
         height:60,
-        borderRadius:50,
+        borderRadius:4,
         marginTop:10,
         paddingLeft:30,
         paddingRight:30,
         backgroundColor:'#000',
     },
     basketEmptyButtonText: {
-        color:'#fff'
+        letterSpacing:0,
+        color:'#fff',
+        fontSize:17,
+        fontFamily: primaryFont,
     }
 });

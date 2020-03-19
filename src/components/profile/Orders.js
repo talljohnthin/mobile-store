@@ -40,15 +40,6 @@ const Orders = (props) => {
                         
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={!props.isLogin && {display:'none'}}>
-                    <View style={styles.ordersStatus} >
-                        <Icon style={styles.iconCar} name="rocket1"/>
-                        <Text style={styles.ordersLabel} > Shipped </Text>
-                        <Badge warning style={styles.ordersBadge}>
-                            <Text style={styles.ordersBadgeText}>2</Text>
-                        </Badge>
-                    </View>
-                </TouchableOpacity>
             </View>
         </View>
     )

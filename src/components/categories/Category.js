@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Image, TouchableOpacity } from 'react-native'
 import {connect} from 'react-redux'
 import { withNavigation } from 'react-navigation'
-import { requestProductSegmentCategory } from './../../redux/actions/product/productActions'
+import { requestProductSegmentCategory, resetGetFilteredProductSize } from './../../redux/actions/product/productActions'
 import Text from '../../utils/Text'
 import Icon from 'react-native-vector-icons/AntDesign'
 
@@ -16,6 +16,7 @@ const Category = (props) => {
         category_name = category_name.slice(0, 25) + '...'
     }
     const handleGetProducts = () => {
+        props.resetGetFilteredProductSize()
         props.requestProductSegmentCategory(segment, category_name)
         props.navigation.navigate('ProductFilterByCategory', { filterCategory: category_name, segment: segment })
     }
@@ -33,7 +34,7 @@ const Category = (props) => {
     )
 }
 
-const mapDispatchToProps = { requestProductSegmentCategory }
+const mapDispatchToProps = { requestProductSegmentCategory, resetGetFilteredProductSize }
 
 export default connect(null, mapDispatchToProps)(withNavigation(Category))
 

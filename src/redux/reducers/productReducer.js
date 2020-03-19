@@ -10,7 +10,8 @@ import {
     PRODUCT_REQUEST_LOADING,
     PRODUCT_REQUEST_ERROR,
     GET_FILTERED_PRODUCT,
-    GET_FILTERED_PRODUCT_SIZE
+    GET_FILTERED_PRODUCT_SIZE,
+    RESET_GET_FILTERED_PRODUCT_SIZE
 } from './../actions/product/productTypes'
 
 const initialState = {
@@ -52,6 +53,11 @@ const reducer = ( state = initialState, action) => {
                 ...state,
                 productLoading: false,
                 selectedCategoriesTotal: action.payload
+            }
+        case RESET_GET_FILTERED_PRODUCT_SIZE :
+            return {
+                ...state,
+                selectedCategoriesTotal: 0
             }
         case GET_FILTERED_PRODUCT :
             const foundFilteredProduct = findFilteredProduct(state, action.payload)

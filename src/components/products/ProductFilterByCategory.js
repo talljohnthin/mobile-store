@@ -27,7 +27,10 @@ const ProductFilterByCategory = (props) => {
         if(selectedCategoriesTotal === 0) {
             getFilteredProductSize(segment, filterCategory)
         }
+        console.log("p len:", products.length)
+        console.log("p total:", selectedCategoriesTotal)
         if(products.length && products.length < selectedCategoriesTotal) {
+          
           requestRestProductSegmentCategory(segment, filterCategory, products.length + 50)
         }
        

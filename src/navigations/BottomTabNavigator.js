@@ -25,7 +25,8 @@ import ProductDetail from './../components/products/ProductDetail'
 import OrderList from './../components/orders/OrderList'
 import ViewOrders from './../components/orders/ViewOrders'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-import { createStackNavigator, HeaderTitle } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack'
+import TotalInBasketAndOrders from './../utils/TotalInBasketAndOrders'
 
 import styles from './Styles'
 
@@ -35,6 +36,8 @@ import {
   primaryFont,
   tertiaryFont
 } from './../styles/Variables'
+
+
 
 const HomeStack = createStackNavigator({
   Home: Home,
@@ -46,7 +49,7 @@ const HomeStack = createStackNavigator({
 }, {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: fifthColor,
+      backgroundColor: '#fff',
     },
     headerTitleStyle: {
       fontSize:17
@@ -63,7 +66,7 @@ const ExploreStack = createStackNavigator({
 }, {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: fifthColor,
+      backgroundColor: '#fff',
     },
     headerTitleStyle: {
       fontSize:17
@@ -87,7 +90,7 @@ const ProfileStack = createStackNavigator({
 }, {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor:fifthColor,
+      backgroundColor:'#fff',
     },
     headerTitleStyle: {
       fontSize:17
@@ -104,7 +107,7 @@ const CategoriesStack = createStackNavigator({
 }, {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: fifthColor,
+      backgroundColor: '#fff',
     },
     headerTintColor: primaryColor,
     headerTitleStyle: {
@@ -167,22 +170,22 @@ export const RootStack = createMaterialBottomTabNavigator({
         <View>
           <Feather name={'user'} style={[{ color: tintColor}]} size={25} />
           <Badge warning style={styles.userBadge}>
-            <Text style={styles.userBadgeCount}>1</Text>
+            <Text style={styles.userBadgeCount}>3</Text>
           </Badge>
         </View>
       )
     }
   }
 },
-  {
-    initialRouteName: 'Home',
-    activeColor: fifthColor,
-    inactiveColor: primaryColor,
-    labeled:true,
-    shifting:false,
-    barStyle: { 
-      backgroundColor: 'transparent',
-      paddingTop:3,
-      paddingBottom:3
-    }
-  })
+{
+  initialRouteName: 'Home',
+  activeColor: fifthColor,
+  inactiveColor: primaryColor,
+  labeled:true,
+  shifting:false,
+  barStyle: { 
+    backgroundColor: 'transparent',
+    paddingTop:3,
+    paddingBottom:3
+  }
+})

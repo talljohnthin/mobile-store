@@ -195,7 +195,7 @@ const Basket = (props) => {
                             <Button
                                 style={styles.basketEmptyButton}
                                 onPress={() => setShowModal(!showModal)} >
-                                <Text style={styles.btnOrderText}>Cancel</Text>
+                                <Text style={styles.basketEmptyButtonText}>Cancel</Text>
                             </Button>
                         </Form>
                     </View>

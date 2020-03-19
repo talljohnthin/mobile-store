@@ -28,21 +28,6 @@ const UserOptions = (props) => {
                         </Right>
                     </ListItem>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.8} onPress={ () => props.navigation.navigate('ProfileUpdate')}>
-                    <ListItem icon style={styles.listItem}>
-                        <Left style={styles.listItem}>
-                            <Button style={styles.UserOptionsButton}>
-                                <IconAntDesign style={styles.UserOptionsIcon} name="setting" />
-                            </Button>
-                        </Left>
-                        <Body style={styles.listItem}>
-                            <Text style={styles.UserOptionsText}>Update Profile</Text>
-                        </Body>
-                        <Right style={styles.listItem}>
-                            <Icon name="arrow-forward" />
-                        </Right>
-                    </ListItem>
-                </TouchableOpacity>
             </Content>
         </View>
     )
