@@ -4,16 +4,27 @@ import { StyleSheet } from 'react-native'
 import { Badge, Text } from 'native-base'
 import { fifthColor, primaryColor } from '../styles/Variables';
 
-const TotalInBasketAndOrders = () => {
-    return <Badge warning style={styles.userBadge}>
-    <Text style={styles.userBadgeCount}>3</Text>
-  </Badge>
+const TotalInBasketAndOrders = (props) => {
+    const { basket, orders, isLogin } = props
+    const total = basket.length + orders.length
+    const basketTotal = basket.length
+
+    const totalTemplate = total <= 0 ? null : <Badge warning style={styles.userBadge}>
+        <Text style={styles.userBadgeCount}>{ total }</Text>
+    </Badge>
+
+    const basketTemplate = basketTotal <= 0 ? null : <Badge warning style={styles.userBadge}>
+        <Text style={styles.userBadgeCount}>{ basketTotal }</Text>
+    </Badge>
+
+    return isLogin ? totalTemplate : basketTemplate;
 }
   
 const mapStateToProps = state => {
     return {
         basket:state.basket.basket,
-        orders:state.orders.orders
+        orders:state.orders.orders,
+        isLogin: state.user.isLogin
     }
 }
   
@@ -34,7 +45,7 @@ const styles = StyleSheet.create({
         fontSize:12,
         paddingLeft:1,
         paddingRight:1,
-        top:-2,
+        top:-4,
         position:"relative"
     }
 });

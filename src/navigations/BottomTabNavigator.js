@@ -169,9 +169,7 @@ export const RootStack = createMaterialBottomTabNavigator({
       tabBarIcon: ({ tintColor }) => (
         <View>
           <Feather name={'user'} style={[{ color: tintColor}]} size={25} />
-          <Badge warning style={styles.userBadge}>
-            <Text style={styles.userBadgeCount}>3</Text>
-          </Badge>
+          <TotalInBasketAndOrders />
         </View>
       )
     }
