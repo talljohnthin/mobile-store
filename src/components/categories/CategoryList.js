@@ -23,7 +23,7 @@ const CategoryList = (props) => {
     const listCategories = props.loading ? <Spinner style={styles.spinner} color={fifthColor} /> : (
         <FlatList
             data={categories}
-            renderItem={({ item }) => <Category item={item} segment={segment} />}
+            renderItem={({ item, index }) => <Category item={item} segment={segment} index={ index }/>}
             keyExtractor={item => item.id.toString()}
         />
     )

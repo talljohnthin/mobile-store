@@ -33,10 +33,10 @@ export default Styles = StyleSheet.create({
         width:60, 
         height:60,
     },
-    userNotImage: {
+    userNotImageText: {
         fontSize:30,
-        fontFamily:tertiaryFont,
-        color:primaryColor
+        fontFamily:primaryFont,
+        color:'#fff'
     },
     userDescWrapper: {
         paddingLeft:15
@@ -105,7 +105,7 @@ export default Styles = StyleSheet.create({
         backgroundColor:fifthColor
     },
     ordersBadgeText: {
-        color:primaryColor,
+        color:"#fff",
         fontSize:13
     },
     //user options
@@ -159,13 +159,11 @@ export default Styles = StyleSheet.create({
         height:60,
         borderRadius:4,
         marginTop:10,
-        backgroundColor:fifthColor,
     },
     buttonTextColor: {
         color: '#fff',
-        fontFamily:tertiaryFont,
+        fontFamily:primaryFont,
         letterSpacing:1,
-        fontSize:16
     },
     //sign up
     signUpWrapper: {

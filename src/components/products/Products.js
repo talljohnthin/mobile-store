@@ -15,16 +15,20 @@ import {
 } from '../../styles/Variables'
 
 const Products = (props) => {
-
     const [products, setProducts] = useState([])
     const [hasProduct, setHasProduct] = useState(false)
- 
+    let isMounted = false
     useEffect(() => {
-        if ( props.products < 1 ) {
-            props.getAllProducts()
-        }  
-        setProducts(props.products)
-        
+        isMounted = true
+        if (isMounted) {
+            if ( props.products < 1 ) {
+                props.getAllProducts()
+            }  
+            setProducts(props.products)
+        }
+        return ()=> {
+            isMounted = false
+        }
     }, [props.products])
 
     useEffect(() => {

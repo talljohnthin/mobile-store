@@ -9,6 +9,11 @@ import AuthStyles from '../../styles/AuthStyles'
 import { withNavigation } from 'react-navigation'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
+import { LinearGradient } from 'expo-linear-gradient';
+import { linearDark, linearLight } from './../../styles/Variables'
+
+import SharedStyles from './../../styles/SharedStyles'
+
 const SignUp = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -51,11 +56,15 @@ const SignUp = (props) => {
                             <Icon active name='ios-lock' style={AuthStyles.IconStyle}/>
                             <Input value={ password } onChangeText={text => setPassword(text)} placeholder='Password' password={true} secureTextEntry={true} style={AuthStyles.input}/>
                         </Item>
-                        <Button 
-                            style={AuthStyles.buttonSolid}
-                            onPress={()=> handleCreateUser()}>
-                            {  _spinner }
-                        </Button>
+                        <TouchableOpacity activeOpacity={0.9} 
+                            onPress={()=> handleCreateUser()} >
+                                <LinearGradient
+                                    start={[0, 1]} end={[1, 0]}
+                                    colors={[linearDark, linearLight]}
+                                    style={[SharedStyles.linearButton]}>
+                                    {  _spinner }
+                                </LinearGradient>
+                        </TouchableOpacity>
                         <TouchableOpacity activeOpacity={0.9} onPress={ () => props.navigation.navigate('Login')}><Text style={AuthStyles.signUp} >Already have an account? <Text  style={AuthStyles.signUpText}>Sign In</Text></Text></TouchableOpacity>
                     </Form>
                 </View>

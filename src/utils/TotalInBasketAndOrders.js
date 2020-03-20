@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         backgroundColor:fifthColor
     },
     userBadgeCount: {
-        color:primaryColor,
+        color:'#fff',
         fontSize:12,
         paddingLeft:1,
         paddingRight:1,

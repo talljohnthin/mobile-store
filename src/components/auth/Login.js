@@ -9,6 +9,10 @@ import { withNavigation } from 'react-navigation'
 import AuthStyles from '../../styles/AuthStyles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
+import { LinearGradient } from 'expo-linear-gradient';
+import { linearDark, linearLight } from './../../styles/Variables'
+
+
 const Login = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -63,13 +67,21 @@ const Login = (props) => {
                         <TouchableOpacity activeOpacity={0.9}>
                             <Text style={AuthStyles.forgotPassword} >Forgot Password?</Text>
                         </TouchableOpacity>
-                        <Button
-                            style={AuthStyles.buttonSolid}
-                            onPress={()=> handleLogin()}
-                        >
-                            { _spinner }
-                            </Button>
-                        <TouchableOpacity activeOpacity={0.9} onPress={ () => props.navigation.navigate('SignUp')}><Text style={AuthStyles.signUp} >Don't have an account? <Text  style={AuthStyles.signUpText}>Sign Up</Text></Text></TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.9} 
+                            style={{marginTop:15}}
+                            onPress={()=> handleLogin()} >
+                                <LinearGradient
+                                    start={[0, 1]} end={[1, 0]}
+                                    colors={[linearDark, linearLight]}
+                                    style={[SharedStyles.linearButton]}>
+                                    {  _spinner }
+                                </LinearGradient>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                                activeOpacity={0.9}
+                                onPress={ () => props.navigation.navigate('SignUp')}>
+                                <Text style={AuthStyles.signUp} >Don't have an account? <Text  style={AuthStyles.signUpText}>Sign Up</Text></Text>
+                        </TouchableOpacity>
                     </Form>
                 </View>
             </View>

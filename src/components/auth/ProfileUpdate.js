@@ -5,9 +5,13 @@ import { updateUser, userLoading, cleanUserSuccessError } from '../../redux/acti
 import { Form, Item, Input, Textarea, Button, Icon, Spinner} from 'native-base'
 import { showToast } from './../../helpers'
 import Text from '../../utils/Text'
-import AuthStyles from '../../styles/AuthStyles'
 import { withNavigation } from 'react-navigation'
+import { LinearGradient } from 'expo-linear-gradient';
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
+import AuthStyles from '../../styles/AuthStyles'
+import Styles from './Styles'
+import { linearDark,linearLight } from './../../styles/Variables'
 
 const ProfileUpdate = (props) => {
     const [uid] = useState(props.user.uid)
@@ -24,16 +28,24 @@ const ProfileUpdate = (props) => {
         }, 500)
     }
 
+    let isMounted = false
+
     useEffect(() => {
-        if (props.message && props.status) {
-            showToast(props.message, props.status)
+        isMounted = true
+        if(isMounted) {
+            if (props.message && props.status) {
+                showToast(props.message, props.status)
+            }
+            return function() {
+                props.cleanUserSuccessError()
+            }
         }
-        return function() {
-            props.cleanUserSuccessError()
+        return () => {
+            isMounted = false;
         }
     }, [props.message])
 
-    const _spinner = props.loading ? <Spinner color='#fff' /> :<Text style={AuthStyles.buttonTextColor}>Update Profile</Text>
+    const _spinner = props.loading ? <Spinner color='#fff' /> :<Text style={Styles.buttonTextColor}>Update Profile</Text>
 
     return (
         <View style={{flex:1, backgroundColor:'#fff', paddingTop:10}}>
@@ -44,11 +56,16 @@ const ProfileUpdate = (props) => {
                             <Icon active name='ios-person' style={AuthStyles.IconStyle}/>
                             <Input value={ fullName } onChangeText={text => setFullName(text)} placeholder='Full Name' style={AuthStyles.input}/>
                         </Item>
-                        <Button 
-                            style={AuthStyles.buttonSolid}
-                            onPress={()=> handleUpdateUser()}>
-                            {  _spinner }
-                        </Button>
+                        <TouchableOpacity activeOpacity={0.9} 
+                            onPress={()=> handleUpdateUser()}
+                            >
+                            <LinearGradient
+                                start={[0, 1]} end={[1, 0]}
+                                colors={[linearDark, linearLight]}
+                                style={[SharedStyles.linearButton]}>
+                                    {  _spinner }
+                            </LinearGradient>
+                        </TouchableOpacity>
                     </Form>
                 </View>
             </View>

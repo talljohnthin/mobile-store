@@ -8,11 +8,12 @@ import Orders from './../components/profile/Orders'
 import UserOptions from './../components/profile/UserOptions'
 import Text from './../utils/Text'
 import { Button,  Spinner } from 'native-base'
+import { LinearGradient } from 'expo-linear-gradient';
 import firebase from './../config/firebase'
-
 import styles from './../components/profile/Styles'
+import { linearDark,linearLight } from './../styles/Variables'
+import SharedStyles from './../styles/SharedStyles'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
-
 
 const Profile = (props) => {
     const { isLogin, uid, orders } = props
@@ -53,24 +54,34 @@ const Profile = (props) => {
             <Orders />
             { props.isLogin && <UserOptions /> }
             <View style={styles.buttonLogoutWrapper}>
-                <Button 
-                    style={[styles.buttonLogout, props.isLogin && {display: 'none'}]}
-                    onPress={ () => props.navigation.navigate('Login')} >
-                    { props.loading ? <Spinner color='#fff' /> : <Text style={styles.buttonTextColor}>LOGIN</Text> }
-                </Button>
+                <TouchableOpacity activeOpacity={0.9} 
+                    style={[{ marginTop:6 },  props.isLogin && {display: 'none'}]}
+                    onPress={ () => props.navigation.navigate('Login')}  >
+                        <LinearGradient
+                            start={[0, 1]} end={[1, 0]}
+                            colors={[linearDark, linearLight]}
+                            style={[SharedStyles.linearButton]}>
+                            <Text style={SharedStyles.linearText}>LOGIN</Text>
+                        </LinearGradient>
+                </TouchableOpacity>
                 <Button 
                     style={[styles.buttonLogout, !props.isLogin && {display: 'none'}]}
                     onPress={ () => handleLogOut() } >
                     { props.loading ? <Spinner color='#fff' /> : <Text style={styles.buttonTextColor}>LOGOUT</Text> }
                 </Button>
-                <Button 
-                    style={[styles.buttonEditUser, !props.isLogin && {display: 'none'}]}
+                <TouchableOpacity activeOpacity={0.9} 
+                    style={[{ marginTop:6 }, !props.isLogin && {display: 'none'}]}
                     onPress={ () => props.navigation.navigate('ProfileUpdate') } >
-                    <Text style={styles.buttonUpdateTextColor}>UPDATE USER</Text>
-                </Button>
+                        <LinearGradient
+                            start={[0, 1]} end={[1, 0]}
+                            colors={[linearDark, linearLight]}
+                            style={[SharedStyles.linearButton]}>
+                            <Text style={SharedStyles.linearText}>UPDATE USER</Text>
+                        </LinearGradient>
+                </TouchableOpacity>
+                { props.isLogin ? null : <TouchableOpacity activeOpacity={0.9} onPress={ () => props.navigation.navigate('SignUp')}><Text style={AuthStyles.signUp} >Don't have an account? <Text  style={AuthStyles.signUpText}>Sign Up</Text></Text></TouchableOpacity> }
             </View>
-            { props.isLogin ? null : <TouchableOpacity style={styles.signUpWrapper} activeOpacity={0.9} onPress={ () => props.navigation.navigate('SignUp')}><Text style={AuthStyles.signUp} >Don't have an account? <Text  style={AuthStyles.signUpText}>Sign Up</Text></Text></TouchableOpacity> }
-        
+            
         </ScrollView>
     )
 }

@@ -5,6 +5,11 @@ import { View} from 'react-native'
 import { Button } from 'native-base'
 import Text from '../../utils/Text'
 import { showToast } from './../../helpers'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+
+import { LinearGradient } from 'expo-linear-gradient';
+import { linearDark, linearLight } from './../../styles/Variables'
+
 
 import styles from './Styles'
 import SharedStyles from '../../styles/SharedStyles'
@@ -31,7 +36,16 @@ const BasketProductTotal = (props) => {
                 <Text style={styles.wishSumValue}>&#8369; {formatMoney(basketTotal)}</Text>
             </View>
             <View style={styles.buttonWrapper}>
-                <Button style={[SharedStyles.buttonSolid, styles.btnOrder]} onPress={()=> handleContinueOrder()}><Text style={[SharedStyles.buttonTextColor, styles.btnOrderText]}>Order Now</Text></Button>
+                <TouchableOpacity activeOpacity={0.9}
+                    style={{marginTop:10}}
+                    onPress={()=> handleContinueOrder()}>
+                        <LinearGradient
+                            start={[0, 1]} end={[1, 0]}
+                            colors={[linearDark, linearLight]}
+                            style={[SharedStyles.linearButton]}>
+                            <Text style={[SharedStyles.buttonTextColor, styles.btnOrderText]}>Continue to order</Text>
+                        </LinearGradient>
+                </TouchableOpacity>
             </View>
         </View>
     )

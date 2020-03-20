@@ -8,6 +8,7 @@ import { withNavigation } from 'react-navigation'
 import ViewOrdersTotal from './ViewOrdersTotal'
 import styles from './../basket/Styles'
 
+
 import {
     primaryColor,
     fifthColor,
@@ -33,7 +34,6 @@ const ViewOrders = ({selectedOrderId, orders, navigation}) => {
             navigation.navigate('OrderList')
             setShowModal(!showModal)
         }
-        console.log(orders)
     }
     return <SafeAreaView style={styles.wishWrapper}>
         <Modal
@@ -41,10 +41,12 @@ const ViewOrders = ({selectedOrderId, orders, navigation}) => {
             footer={
             <ModalFooter>
                 <ModalButton
+                textStyle={{ fontSize:17, color:primaryColor, fontFamily:primaryFont }}
                 text="Cancel"
                 onPress={() => setShowModal(!showModal)}
                 />
                 <ModalButton
+                textStyle={{ fontSize:17, color:primaryColor, fontFamily:primaryFont }}
                 text="Ok"
                 onPress={() => handleDeleteOrder() }
                 />
@@ -52,14 +54,14 @@ const ViewOrders = ({selectedOrderId, orders, navigation}) => {
             }
         >
             <ModalContent>
-                <Text> Are you sure you want to cancel this order? </Text>
+                <Text style={{ fontSize:18, color:primaryColor, fontFamily:primaryFont }}> Are you sure you want to cancel this order? </Text>
             </ModalContent>
         </Modal>
         <FlatList
             contentContainerStyle={{ paddingBottom: 100 }}
             data={products}
             renderItem={({ item, index }) => <OrdersProduct item={item} index={index} />}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item, index) => index.toString()}
             ListFooterComponent={()=> <ViewOrdersTotal 
                 total={total} 
                 status={status} 
@@ -83,7 +85,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { deleteOrder }
 
-export default connect(mapStateToProps)(withNavigation(ViewOrders))
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(ViewOrders))
 
 const Styles = StyleSheet.create({
     //form
@@ -141,6 +143,11 @@ const Styles = StyleSheet.create({
         marginLeft:15,
         position:'relative',
         top:2,
+    },
+    //modal button
+    modalButton: {
+        fontFamily:primaryFont,
+        color:primaryColor
     }
 })
 

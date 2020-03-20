@@ -29,7 +29,7 @@ const OrderList = (props) => {
 }
 OrderList.navigationOptions = {
     headerShown: true,
-    title:'Your Orders'
+    title:'List of active orders'
 };
 
 

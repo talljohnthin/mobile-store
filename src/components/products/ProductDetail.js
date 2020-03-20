@@ -9,6 +9,8 @@ import { Tabs, Button, Tab, TabHeading } from 'native-base'
 import Text from '../../utils/Text'
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { LinearGradient } from 'expo-linear-gradient';
+import { linearDark, linearLight } from './../../styles/Variables'
 
 import {
     primaryColor,
@@ -197,9 +199,15 @@ const ProductDetail = (props) => {
                 {renderVariationOption()}
             </ScrollView>
             <View style={styles.btnWishListWrapper}>
-                <Button style={styles.btnWishList} large rounded onPress={()=> addToBasket()}>
-                    <Text style={styles.btnWishListText}>Add To Basket</Text>
-                </Button>
+                <TouchableOpacity activeOpacity={0.9} 
+                    onPress={()=> addToBasket()}>
+                    <LinearGradient
+                        start={[0, 1]} end={[1, 0]}
+                        colors={[linearDark, linearLight]}
+                        style={[SharedStyles.linearButton]}>
+                        <Text style={styles.btnWishListText}>Add To Basket</Text>
+                    </LinearGradient>
+                 </TouchableOpacity>
             </View>
             <View>
                 <Tabs
@@ -362,21 +370,12 @@ const styles = StyleSheet.create({
     // button wish list
     btnWishListWrapper: {
         padding: 20,
-        alignItems: 'center',
         borderBottomWidth: 1,
         borderColor: '#f8f8f8',
     },
-    btnWishList: {
-        color: '#fff',
-        backgroundColor: fifthColor,
-        justifyContent: 'center',
-        height: 50,
-        borderRadius:4
-    },
     btnWishListText: {
-        color: primaryColor,
-        paddingLeft: 30,
-        paddingRight: 30
+        color: "#fff",
+        fontFamily:primaryFont,
     }
 })
 

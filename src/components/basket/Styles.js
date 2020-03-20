@@ -150,10 +150,9 @@ export default Styles = StyleSheet.create({
         marginTop:25
     },
     btnOrderText: {
-        textTransform:'capitalize',
-        letterSpacing:0,
-        color:'#000',
-        fontSize:17,
+        textTransform:'uppercase',
+        color:'#fff',
+        fontSize:18,
         fontFamily: primaryFont,
     },
     //empty basket
@@ -184,9 +183,9 @@ export default Styles = StyleSheet.create({
         backgroundColor:'#000',
     },
     basketEmptyButtonText: {
-        letterSpacing:0,
+        textTransform:'uppercase',
         color:'#fff',
-        fontSize:17,
+        fontSize:18,
         fontFamily: primaryFont,
     }
 });

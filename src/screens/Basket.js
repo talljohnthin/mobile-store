@@ -12,6 +12,10 @@ import { Loader }  from './../loader/Loader'
 import styles from '../components/basket/Styles'
 import { showToast } from './../helpers'
 
+import { LinearGradient } from 'expo-linear-gradient';
+import { linearDark, linearLight } from './../styles/Variables'
+import SharedStyles from './../styles/SharedStyles'
+
 import {
     primaryColor,
     fifthColor,
@@ -187,15 +191,19 @@ const Basket = (props) => {
                                     style={Styles.textArea}
                                 />
                             </Item>
-                            <Button
-                                style={styles.btnOrder}
+                            <TouchableOpacity activeOpacity={0.9} 
                                 onPress={() => handleOrderProducts() } >
-                                <Text style={styles.btnOrderText}>Order </Text>
-                            </Button>
+                                    <LinearGradient
+                                        start={[0, 1]} end={[1, 0]}
+                                        colors={[linearDark, linearLight]}
+                                        style={[SharedStyles.linearButton]}>
+                                        <Text style={styles.btnOrderText}>Order </Text>
+                                    </LinearGradient>
+                            </TouchableOpacity>
                             <Button
                                 style={styles.basketEmptyButton}
                                 onPress={() => setShowModal(!showModal)} >
-                                <Text style={styles.basketEmptyButtonText}>Cancel</Text>
+                                <Text style={styles.basketEmptyButtonText}>CANCEL</Text>
                             </Button>
                         </Form>
                     </View>
@@ -205,11 +213,16 @@ const Basket = (props) => {
         } else {
             return <SafeAreaView style={styles.basketEmptyWrapper}>
                 <Text style={styles.basketEmptyText}>Basket is empty. Choose a product by clicking the button below.</Text>
-                <Button
-                    style={styles.basketEmptyButton}
+                <TouchableOpacity activeOpacity={0.9} 
+                    style={{marginTop:10}}
                     onPress={() => navigation.navigate('Explore')} >
-                    <Text style={styles.basketEmptyButtonText}>Go to Products</Text>
-                </Button>
+                    <LinearGradient
+                        start={[0, 1]} end={[1, 0]}
+                        colors={[linearDark, linearLight]}
+                        style={[SharedStyles.linearButton, {width:250}]}>
+                        <Text style={[styles.basketEmptyButtonText]}>Go to Products</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
             </SafeAreaView>
         }
     }

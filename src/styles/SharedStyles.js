@@ -1,13 +1,8 @@
 import { StyleSheet } from 'react-native'
 import {
     primaryColor,
-    secondaryColor,
-    tertiaryColor,
-    fourthColor,
     fifthColor,
     primaryFont,
-    secondaryFont,
-    tertiaryFont,
     fourthFont
 } from './Variables'
 
@@ -44,5 +39,23 @@ export default SharedStyles = StyleSheet.create({
         paddingTop:0,
         paddingBottom:0,
         height:75,
+    },
+    //linearButton
+    linearButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent:'center',
+        height:60,
+        borderRadius:4,
+        width:'100%'
+    },
+    linearText: {
+        color:'#fff'
+    },
+    //Button reset
+    ButtonReset: {
+        backgroundColor: "transparent", 
+        elevation: 0,
+        width:"100%"
     }
   });

@@ -29,24 +29,6 @@ const OrdersProduct = (props) => {
     };
     const formatedPrice = formatMoney(price)
 
-    const handleAddQty = () => {
-        if(props.index !== null || props.index !== undefined) {
-           // props.addQuantity(props.index)
-           // props.sumProductsInBasket()
-        }
-    }
-    const handleSubtractQty = () => {
-        if(props.index !== null || props.index !== undefined) {
-           // props.subtractQuantity(props.index)
-           // props.sumProductsInBasket()
-        }
-    }
-    const handleRemove = () => {
-        if(props.index !== null || props.index !== undefined) {
-           // props.removeToBasket(props.index)
-           // props.sumProductsInBasket()
-        }
-    }
     return (
         <View style={styles.wishCard}>
             <View style={styles.wishImageWrapper}>
@@ -57,18 +39,12 @@ const OrdersProduct = (props) => {
             </View>
             <View style={styles.wishDescWrapper}>
                 <View style={styles.wishTopWrapper}>
-                    <TouchableOpacity style={styles.wishRemove} onPress={()=> handleRemove() }><Icon style={styles.wishRemoveIcon} name={'close'} size={20} /></TouchableOpacity>
                     <Text style={styles.wishName}>{name}</Text>
                     <Text style={styles.wishVariation}>{variation}</Text>
                     <Text style={styles.wishOption}>{option}</Text>
                 </View>
                 <View style={styles.wishButtomWrapper}>
                     <Text style={styles.wishTotal}>&#8369; {formatedPrice}</Text>
-                    <View style={styles.wishCounter}>
-                        <TouchableOpacity onPress={()=> handleSubtractQty()}><Icon style={styles.wishMinus} name={'minuscircleo'} size={20} /></TouchableOpacity>
-                        <Text style={styles.wishCount}>{qty}</Text>
-                        <TouchableOpacity onPress={()=> handleAddQty()}><Icon style={styles.wishPlus} name={'pluscircleo'} size={20} /></TouchableOpacity>
-                    </View>
                 </View>
             </View>
         </View>

@@ -2,7 +2,9 @@ import React from 'react'
 import { View} from 'react-native'
 import { Button } from 'native-base'
 import Text from '../../utils/Text'
-
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { LinearGradient } from 'expo-linear-gradient';
+import { linearDark, linearLight } from './../../styles/Variables'
 import styles from './Styles'
 import SharedStyles from '../../styles/SharedStyles'
 
@@ -29,6 +31,18 @@ export default ViewOrdersTotal = ({ total, status, orderId, cancelOrder }) => {
     const handleCancelOrder = () => {
         cancelOrder()
     }
+
+    const ProceedOrder = <TouchableOpacity activeOpacity={0.9} 
+            style={{marginTop:20}}
+            onPress={()=> handleProceedOrder()} >
+                <LinearGradient
+                    start={[0, 1]} end={[1, 0]}
+                    colors={[linearDark, linearLight]}
+                    style={[SharedStyles.linearButton]}>
+                    <Text style={[styles.btnOrderText]}>PROCEED ORDER</Text>
+                </LinearGradient>
+        </TouchableOpacity>
+
     return (
         <View style={styles.orderSumWrapper}>
             <View style={styles.orderShipping}>
@@ -39,7 +53,7 @@ export default ViewOrdersTotal = ({ total, status, orderId, cancelOrder }) => {
                 <Text style={styles.orderSumValue}>&#8369; {formatedValue}</Text>
             </View>
             <View style={styles.buttonWrapper}>
-                { status !== 'On Review' && <Button style={[SharedStyles.buttonSolid, styles.btnOrder]} onPress={()=> handleProceedOrder()}><Text style={[SharedStyles.buttonTextColor, styles.btnOrderText]}>Proceed Order</Text></Button>}
+                { status !== 'On Review' && ProceedOrder}
                 <Button style={[SharedStyles.buttonSolid, styles.btnCancel]} onPress={()=> handleCancelOrder()}><Text style={[SharedStyles.buttonTextColor, styles.btnOrderText]}>Cancel Order</Text></Button>
             </View>
         </View>

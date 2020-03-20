@@ -12,6 +12,7 @@ const Category = (props) => {
     let category_name = props.item.name.name
     const categoryId = props.item.id
     const segment = props.segment
+    const index = props.index
     if (category_name.length > 20) {
         category_name = category_name.slice(0, 25) + '...'
     }
@@ -22,7 +23,7 @@ const Category = (props) => {
     }
     return (
         <TouchableOpacity activeOpacity={.6} onPress={handleGetProducts}>
-            <View style={styles.categoryCard}>
+            <View style={[styles.categoryCard, index % 2 === 0 && {backgroundColor:'#fcfcfc'}]}>
                 <View style={styles.categoryDescWrapper}>
                     <Text style={styles.categoryName}>{category_name}</Text>
                 </View>

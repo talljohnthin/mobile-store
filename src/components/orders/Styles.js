@@ -82,10 +82,10 @@ export default Styles = StyleSheet.create({
         fontSize:16,
         display:'flex',
         backgroundColor:fifthColor,
-        color:primaryColor,
+        color:"#fff",
         textAlign:'center',
         borderRadius:28,
-        paddingTop:2
+        paddingTop:3
     },
     // order total
     orderSumWrapper: {
@@ -138,10 +138,9 @@ export default Styles = StyleSheet.create({
         marginTop:10
     },
     btnOrderText: {
-        textTransform:'capitalize',
-        letterSpacing:0,
+        textTransform:'uppercase',
         color:'#fff',
-        fontSize:17,
+        fontSize:18,
         fontFamily: primaryFont,
     },
 });

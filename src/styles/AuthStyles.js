@@ -43,7 +43,7 @@ export default AuthStyles = StyleSheet.create({
         width:'100%'
     },
     IconStyle: {
-        color:primaryColor,
+        color:fifthColor,
         marginTop:17
     },
     // wrappers
@@ -85,9 +85,9 @@ export default AuthStyles = StyleSheet.create({
     },
     buttonTextColor : {
         color: '#fff',
-        fontFamily:tertiaryFont,
+        fontFamily:primaryFont,
         letterSpacing:1,
-        fontSize:16
+        textTransform:'uppercase'
     },
     forgotPassword: {
         paddingTop:15,
