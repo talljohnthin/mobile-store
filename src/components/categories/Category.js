@@ -23,7 +23,7 @@ const Category = (props) => {
     }
     return (
         <TouchableOpacity activeOpacity={.6} onPress={handleGetProducts}>
-            <View style={[styles.categoryCard, index % 2 === 0 && {backgroundColor:'#fcfcfc'}]}>
+            <View style={[styles.categoryCard, index % 2 === 0 && {backgroundColor:'#fbfbfb'}]}>
                 <View style={styles.categoryDescWrapper}>
                     <Text style={styles.categoryName}>{category_name}</Text>
                 </View>

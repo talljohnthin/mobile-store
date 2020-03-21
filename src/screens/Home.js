@@ -2,20 +2,25 @@ import React, { useEffect} from 'react'
 import {connect} from 'react-redux'
 import { getSegments } from './../redux/actions/segment/segmentActions'
 import { getCategories } from './../redux/actions/category/categoryActions'
-import { View, Text } from 'react-native'
-import Hero from './../components/home/Hero'
-import FlashSale from '../components/home/FlashSale'
+import { View } from 'react-native'
+import Specials from './../components/home/Specials'
 
 import styles from './../components/home/Styles'
 const Home = (props) => {
+    let isMounted = false
     useEffect(() => {
+       isMounted = true
+       if(isMounted) {
         props.getSegments()
         props.getCategories()
+       }
+       return () => {
+           isMounted = false
+       }
     }, [])
     return (
         <View style={styles.homeWrapper}>
-            <Hero />
-            <FlashSale />
+            <Specials />
         </View>
     )
 }

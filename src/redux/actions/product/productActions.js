@@ -20,7 +20,6 @@ export const getAllProducts = (countLimit) => {
         .limit(countLimit || 10)
         .get()
         .then(snapshot => {
-            console.log(snapshot.size)
             const products = []
             snapshot.forEach(doc => {
                 const obj = {

@@ -16,35 +16,20 @@ export default Styles = StyleSheet.create({
     homeWrapper: {
         flex:1,
         height:'100%',
-        backgroundColor:'#fff'
+        backgroundColor:'#fff',
     },
-    imageOpacity: {
-        height:370,
+    specialsWrapper: {
+        padding:15
     },
-    imageBackground: {
-        flex: 1,
-    },
-    productWrapper: {
-        minHeight:300
-    },
-    productTitleWrapper: {
-        flexDirection: 'row',
-        alignItems:'center',
-        justifyContent:'space-between',
-        paddingLeft:12,
-        paddingRight:12,
-        paddingTop:12,
-        backgroundColor:'#fff',   
-    },
-    productTitle: {
-        fontFamily:tertiaryFont,
-        fontSize:20
-    },
-    productShowLink: {
-        fontSize: 14,
-        textTransform:'uppercase'
-    },
-    spinner: {
-        top:50
+    specialImage: {
+        width: "100%", 
+        height: 210,
+        marginBottom:15,
+        borderRadius:10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 1,
     }
 });
