@@ -15,7 +15,8 @@ let deviceWidth = Dimensions.get('window').width
 export default Styles = StyleSheet.create({
     wishWrapper: { 
         backgroundColor:'#fff',
-        padding:0
+        padding:0,
+        flex:1
     },
     wishCard: {
         width: '100%',
@@ -110,7 +111,6 @@ export default Styles = StyleSheet.create({
     },
     // wish total
     wishSumWrapper: {
-        
     },
     wishShipping: {
         padding:20,

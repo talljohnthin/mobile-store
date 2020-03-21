@@ -2,6 +2,7 @@ import React, { useEffect} from 'react'
 import {connect} from 'react-redux'
 import { getSegments } from './../redux/actions/segment/segmentActions'
 import { getCategories } from './../redux/actions/category/categoryActions'
+import { getAllSpecials } from './../redux/actions/special/specialActions'
 import { View } from 'react-native'
 import Specials from './../components/home/Specials'
 
@@ -13,6 +14,7 @@ const Home = (props) => {
        if(isMounted) {
         props.getSegments()
         props.getCategories()
+        props.getAllSpecials()
        }
        return () => {
            isMounted = false
@@ -25,7 +27,7 @@ const Home = (props) => {
     )
 }
 
-const mapDispatchToProps = { getSegments, getCategories }
+const mapDispatchToProps = { getSegments, getCategories, getAllSpecials }
 
 export default connect(null, mapDispatchToProps)(Home)
 

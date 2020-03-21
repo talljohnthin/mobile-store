@@ -11,7 +11,7 @@ import styles from './Styles'
 const Order = (props) => {
     const { index, selectOrder, navigation } = props
     const { id: orderId } = props.item
-    const { order_date } = props.item.name
+    const { order_date, status } = props.item.name
     const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     const dateSplitted = order_date.split("-")
     const orderDate = `${ months[dateSplitted[1]] } ${ dateSplitted[2] }, ${ dateSplitted[0] }`
@@ -20,11 +20,13 @@ const Order = (props) => {
         navigation.navigate('ViewOrders')
     }
     return (
-        <TouchableOpacity activeOpacity={.6} onPress={ ()=> handleSelectOrder()}>
+        <TouchableOpacity 
+        activeOpacity={.6} 
+        onPress={ ()=> handleSelectOrder()}>
             <View style={styles.orderCard}>
                 <View style={styles.orderDescWrapper}>
                     <Text style={styles.orderItem}>{ index }</Text>
-                    <Text style={styles.orderDate}>{ orderDate }</Text>
+                    <Text style={styles.orderDate}>{ orderDate } / <Text style={[styles.orderStatus, status == 'Reviewed' && styles.orderStatusReady]}> { status } </Text></Text>
                 </View>
                 <View style={styles.orderArrowIconWrapper}>
                     <Icon name={'arrowright'} size={20} />

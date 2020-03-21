@@ -7,7 +7,9 @@ import {
     ORDER_RESET,
     GET_ORDERS,
     SELECT_ORDER,
-    DELETE_ORDER
+    DELETE_ORDER,
+    PROCEED_TO_ON_SHIP,
+    RECEIVE_ORDER
 } from './orderTypes'
 
 export const getOrders = (userId) => {
@@ -28,7 +30,7 @@ export const getOrders = (userId) => {
             })
             dispatch({
                 type: GET_ORDERS,
-                payload: orders
+                payload: orders.filter(e => e.name.status !== 'Received')
             })
         }, function (error) {
             dispatch({
@@ -69,13 +71,44 @@ export const selectOrder = (orderId) => {
     }
 }
 export const deleteOrder = (orderId) => {
-    db.collection("orders").doc(orderId).delete().then(function() {
-        console.log("Document successfully deleted!");
-    }).catch(function(error) {
-        console.error("Error removing document: ", error);
-    });
-    return {
-        type: DELETE_ORDER
+    return (dispatch) => {
+        db.collection("orders")
+          .doc(orderId)
+          .delete()
+          .then(function() {
+            dispatch({
+                type: DELETE_ORDER
+            })
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });   
+    } 
+}
+export const proceedToOnShip = (orderId) => {
+    return (dispatch) => {
+        db.collection("orders").doc(orderId).update({
+            status: "On Ship"
+        }).then(function() {
+            dispatch({
+                type: PROCEED_TO_ON_SHIP
+            })
+        }).catch(function(error) {
+            console.error("Error on proceeding order: ", error);
+        });
     }
 }
+export const receiveOrder = (orderId) => {
+    return (dispatch) => {
+        db.collection("orders").doc(orderId).update({
+            status: "Received"
+        }).then(function() {
+            dispatch({
+                type: RECEIVE_ORDER
+            })
+        }).catch(function(error) {
+            console.error("Error on proceeding order: ", error);
+        });
+    }
+}
+
 

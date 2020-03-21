@@ -38,12 +38,14 @@ export default Styles = StyleSheet.create({
         fontSize:24
     },
     orderWrapper: { 
-        backgroundColor:'#fff',
+        backgroundColor:'#efefef',
         padding:0,
+        flex:1
     },
     orderCard: {
         width: '100%',
         position:'relative',
+        backgroundColor:'#fff',
         flex:1,
         flexDirection:'row',
         alignItems:'center',
@@ -57,15 +59,22 @@ export default Styles = StyleSheet.create({
     orderDescWrapper: {
         alignItems:'center',
         justifyContent:'center',
-        width: 190,
+        width: 265,
         flexDirection:'row'
     },
     orderDate: {
         fontFamily: primaryFont,
-        fontSize:18,
+        fontSize:17,
         paddingTop:0,
         width:'85%',
         paddingLeft:10
+    },
+    orderStatus: {
+        fontSize:14,
+        color:"gray"
+    },
+    orderStatusReady: {
+        color:fifthColor
     },
     orderArrowIconWrapper: {
         width:100,
@@ -143,4 +152,11 @@ export default Styles = StyleSheet.create({
         fontSize:18,
         fontFamily: primaryFont,
     },
+    // On ship text
+    OnShipText: {
+        fontSize:20,
+        marginTop:30,
+        textAlign:'center',
+        color:fifthColor
+    }
 });

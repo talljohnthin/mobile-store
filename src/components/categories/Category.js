@@ -10,7 +10,7 @@ import styles from './Styles'
 
 const Category = (props) => {
     let category_name = props.item.name.name
-    const categoryId = props.item.id
+    const url = props.item.name.url
     const segment = props.segment
     const index = props.index
     if (category_name.length > 20) {
@@ -24,6 +24,10 @@ const Category = (props) => {
     return (
         <TouchableOpacity activeOpacity={.6} onPress={handleGetProducts}>
             <View style={[styles.categoryCard, index % 2 === 0 && {backgroundColor:'#fbfbfb'}]}>
+                <Image 
+                    style={{ width: 50, height: 50, borderRadius: 50 }} 
+                    source={{ uri : url}}
+                />
                 <View style={styles.categoryDescWrapper}>
                     <Text style={styles.categoryName}>{category_name}</Text>
                 </View>

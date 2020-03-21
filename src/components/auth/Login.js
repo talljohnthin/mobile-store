@@ -49,8 +49,8 @@ const Login = (props) => {
         <View style={{flex:1, backgroundColor:'#fff'}}>
             <View style={AuthStyles.headline}>
                 <View>
-                    <Text style={AuthStyles.headlineTitle}>Owkii</Text>
-                    <Text style={AuthStyles.headlineText}>In publishing and graphic design, lorem ipsum In publishing</Text>
+                    <Text style={AuthStyles.headlineTitle}>HapiTayo</Text>
+                    <Text style={AuthStyles.headlineText}>A place where buying is fun.</Text>
                 </View>
             </View>
             <View style={AuthStyles.wrapper}>

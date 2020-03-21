@@ -1,16 +1,4 @@
 import { StyleSheet } from 'react-native'
-import {
-    primaryColor,
-    secondaryColor,
-    tertiaryColor,
-    fourthColor,
-    fifthColor,
-    primaryFont,
-    secondaryFont,
-    tertiaryFont,
-    fourthFont,
-    fiftFont
-} from '../../styles/Variables'
 
 export default Styles = StyleSheet.create({
     homeWrapper: {
@@ -18,7 +6,7 @@ export default Styles = StyleSheet.create({
         height:'100%',
         backgroundColor:'#fff',
     },
-    specialsWrapper: {
+    FlatListStyle: {
         padding:15
     },
     specialImage: {
@@ -27,9 +15,8 @@ export default Styles = StyleSheet.create({
         marginBottom:15,
         borderRadius:10,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
-        elevation: 1,
     }
 });

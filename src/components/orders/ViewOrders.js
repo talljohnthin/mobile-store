@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { connect } from 'react-redux'
 import { SafeAreaView, FlatList, StyleSheet, Text } from 'react-native'
 import Modal, { ModalContent, ModalFooter, ModalButton } from 'react-native-modals';
-import { deleteOrder } from './../../redux/actions/order/orderActions'
+import { deleteOrder, proceedToOnShip } from './../../redux/actions/order/orderActions'
 import OrdersProduct  from './OrdersProduct'
 import { withNavigation } from 'react-navigation'
 import ViewOrdersTotal from './ViewOrdersTotal'
@@ -15,7 +15,8 @@ import {
     primaryFont,
 } from './../../styles/Variables'
 
-const ViewOrders = ({selectedOrderId, orders, navigation}) => {
+const ViewOrders = (props) => {
+    const {selectedOrderId, orders, navigation} = props
     const [showModal, setShowModal] = useState(false)
     const listOrders = orders.filter(e => e.id === selectedOrderId)
     let products = []
@@ -30,9 +31,14 @@ const ViewOrders = ({selectedOrderId, orders, navigation}) => {
     }
     const handleDeleteOrder = () => {
         if (selectedOrderId) {
-            deleteOrder(selectedOrderId)
+            props.deleteOrder(selectedOrderId)
             navigation.navigate('OrderList')
             setShowModal(!showModal)
+        }
+    }
+    const handleProceedOrder = () => {
+        if (selectedOrderId) {
+            props.proceedToOnShip(selectedOrderId)
         }
     }
     return <SafeAreaView style={styles.wishWrapper}>
@@ -67,6 +73,7 @@ const ViewOrders = ({selectedOrderId, orders, navigation}) => {
                 status={status} 
                 orderId={selectedOrderId}
                 cancelOrder = { ()=> handleCancelOrder() }
+                proceedOrder = { ()=> handleProceedOrder() }
             /> }
         />
     </SafeAreaView>
@@ -83,7 +90,7 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = { deleteOrder }
+const mapDispatchToProps = { deleteOrder, proceedToOnShip }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(ViewOrders))
 
