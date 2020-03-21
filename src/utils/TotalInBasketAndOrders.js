@@ -6,7 +6,7 @@ import { fifthColor, primaryColor } from '../styles/Variables';
 
 const TotalInBasketAndOrders = (props) => {
     const { basket, orders, isLogin } = props
-    const total = basket.length + orders.length
+    const total = basket.length + orders.filter(e => e.name.status !== 'Received').length
     const basketTotal = basket.length
 
     const totalTemplate = total <= 0 ? null : <Badge warning style={styles.userBadge}>

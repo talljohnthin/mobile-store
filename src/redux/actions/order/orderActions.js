@@ -30,7 +30,7 @@ export const getOrders = (userId) => {
             })
             dispatch({
                 type: GET_ORDERS,
-                payload: orders.filter(e => e.name.status !== 'Received')
+                payload: orders
             })
         }, function (error) {
             dispatch({

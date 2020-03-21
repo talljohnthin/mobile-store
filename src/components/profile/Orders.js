@@ -12,7 +12,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 const Orders = (props) => {
     const { basket, orders } = props
     const basketBadgeCount = basket.length
-    const ordersBadgeCount = orders.length
+    const ordersBadgeCount = orders.filter(e => e.name.status !== 'Received').length
     return (
         <View style={styles.ordersWrapper}>
             <Text  style={styles.orderTitle} >My Order</Text>

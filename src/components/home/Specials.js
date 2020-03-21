@@ -4,7 +4,11 @@ import {SafeAreaView, FlatList} from 'react-native'
 import Special from './Special'
 import { connect } from 'react-redux'
 
+import {
+    fifthColor
+} from '../../styles/Variables'
 import styles from './Styles'
+
 const Specials = ({ allSpecials }) => {
     const [specials, setSpecials ] = useState([])
     let isMounted = false
@@ -18,7 +22,7 @@ const Specials = ({ allSpecials }) => {
             isMounted = false
         }
     }, [allSpecials])
-    const listSpecials = specials.length <= 0 ? <Spinner style={styles.spinner} /> : (
+    const listSpecials = specials.length <= 0 ? <Spinner style={[styles.spinner, {marginTop:60}]} color={fifthColor} /> : (
         <FlatList
             style={styles.FlatListStyle}
             data={ specials }

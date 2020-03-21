@@ -8,7 +8,6 @@ import { withNavigation } from 'react-navigation'
 import ViewOrdersTotal from './ViewOrdersTotal'
 import styles from './../basket/Styles'
 
-
 import {
     primaryColor,
     fifthColor,
@@ -79,8 +78,10 @@ const ViewOrders = (props) => {
     </SafeAreaView>
 }
 
-ViewOrders.navigationOptions = {
-    title: 'View Orders'
+ViewOrders.navigationOptions = ()=> {
+    return {
+        title: 'Orders'
+    }
 }
 
 const mapStateToProps = state => {

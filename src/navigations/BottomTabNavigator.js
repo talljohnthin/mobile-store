@@ -24,11 +24,10 @@ import OrderSuccess from './../components/orders/OrderSuccess'
 import ProductDetail from './../components/products/ProductDetail'
 import OrderList from './../components/orders/OrderList'
 import ViewOrders from './../components/orders/ViewOrders'
+import HistoryList from './../components/orders/HistoryList'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { createStackNavigator } from 'react-navigation-stack'
 import TotalInBasketAndOrders from './../utils/TotalInBasketAndOrders'
-
-import styles from './Styles'
 
 import {
   primaryColor,
@@ -86,7 +85,8 @@ const ProfileStack = createStackNavigator({
   ProfileUpdate: ProfileUpdate,
   OrderSuccess : OrderSuccess,
   OrderList: OrderList,
-  ViewOrders: ViewOrders
+  HistoryList: HistoryList,
+  ViewOrders: ViewOrders,
 }, {
   defaultNavigationOptions: {
     headerStyle: {

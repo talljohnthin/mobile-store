@@ -25,7 +25,7 @@ const initialPhoto = [
 ]
 
 const ProductDetail = (props) => {
-    const { productName, priceOptions, descriptions, cover, productImages  } = props.product.name
+    const { productName, priceOptions, descriptions, cover, productImages, shippingInfo  } = props.product.name
     const [activeTab, setActiveTab] = useState(0)
     const [productImage, setProductImage] = useState(initialPhoto)
     const [price, setPrice] = useState(0)
@@ -235,7 +235,7 @@ const ProductDetail = (props) => {
                         tabBarUnderlineStyle={styles.tabBarUnderlineStyle}
                     >
                         <View style={styles.productDetailDescription}>
-                            <Text style={styles.productDetailDescriptionText}>Shipping info here</Text>
+                            <Text style={styles.productDetailDescriptionText}>{ shippingInfo }</Text>
                         </View>
                     </Tab>
                 </Tabs>
@@ -247,6 +247,7 @@ const ProductDetail = (props) => {
 }
 ProductDetail.navigationOptions = {
     headerShown: true,
+    headerTitleAlign:'center',
     title:'Product Information'
 };
 
