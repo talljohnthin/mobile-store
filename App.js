@@ -13,7 +13,7 @@ import { RootStack } from './src/navigations/BottomTabNavigator'
 const { store, persistor } = returnStoreAndPersistor()
 
 console.disableYellowBox = true;
-
+//comment
 const Application = createAppContainer(RootStack)
 const App = () => {
    

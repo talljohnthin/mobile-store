@@ -49,7 +49,7 @@ const Login = (props) => {
         <View style={{flex:1, backgroundColor:'#fff'}}>
             <View style={AuthStyles.headline}>
                 <View>
-                    <Text style={AuthStyles.headlineTitle}>HapiTayo</Text>
+                    <Text style={AuthStyles.headlineTitle}>Shiqa Shop</Text>
                     <Text style={AuthStyles.headlineText}>A place where buying is fun.</Text>
                 </View>
             </View>
