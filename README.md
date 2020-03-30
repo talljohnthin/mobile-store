@@ -1,4 +1,4 @@
-This client side android app project can be download and tested here: https://drive.google.com/file/d/1uW8-p-ovmO2MEgxw1Zz3AcBXTRW9oVWU/view?usp=sharing
+This Android app can be download and tested here: https://drive.google.com/file/d/1uW8-p-ovmO2MEgxw1Zz3AcBXTRW9oVWU/view?usp=sharing
 
 ## Client Shiqa Ecommerce App
 This app is the client side of Shiqa Shopping ecommerce app, where customers can view, order and monitor products and orders.
